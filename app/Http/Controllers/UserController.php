@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Rules\MatchOldPassword;
+use Illuminate\Support\Facades\Hash;
+use App\User;
 use Auth;
 
 class UserController extends Controller
@@ -21,6 +24,18 @@ class UserController extends Controller
     {
         $user = Auth::user();
         return view('backend/user/setting', ['user' => $user]);
+    }
+    public function changePassword(Request $request){
+
+        $request->validate([
+            'current_password' => ['required', new MatchOldPassword],
+            'new_password' => ['required'],
+            'new_confirm_password' => ['same:new_password'],
+        ]);
+   
+        User::find(Auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
+
+        return redirect('/dashboard/account/setting')->with('status', 'Password changed succesfully');
     }
 
     /**
@@ -73,9 +88,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        User::where('id', $user->id)->update([
+                'name' => $request->name
+            ]);
+        return redirect('/dashboard/account/setting')->with('status', 'Username changed succesfully');
     }
 
     /**

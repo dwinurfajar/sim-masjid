@@ -28,4 +28,5 @@ Route::group(['prefix'=>'dashboard', 'middleware'=>['auth']], function(){
 	Route::get('/', 'HomeController@index');
 	Route::resource('user', 'UserController');
 	Route::get('account/setting', 'UserController@setting')->name('user.setting');
+	Route::post('change-password', 'UserController@changePassword')->name('change.password');
 });
