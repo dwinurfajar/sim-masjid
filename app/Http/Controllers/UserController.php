@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Auth;
 
 class UserController extends Controller
 {
@@ -14,6 +16,11 @@ class UserController extends Controller
     public function index()
     {
         return view('backend/dashboard');
+    }
+    public function setting()
+    {
+        $user = Auth::user();
+        return view('backend/user/setting', ['user' => $user]);
     }
 
     /**
@@ -56,7 +63,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('backend/user/setting');
     }
 
     /**

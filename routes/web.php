@@ -22,5 +22,10 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix'=>'admin', 'middleware'=>['admin','auth']], function(){
-	Route::resource('', 'UserController');
+
+});
+Route::group(['prefix'=>'dashboard', 'middleware'=>['auth']], function(){
+	Route::get('/', 'HomeController@index');
+	Route::resource('user', 'UserController');
+	Route::get('account/setting', 'UserController@setting')->name('user.setting');
 });

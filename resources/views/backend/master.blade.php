@@ -22,7 +22,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i> {{ Auth::user()->name }} </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="#">Profile</a><a class="dropdown-item" href="#">Setting</a>
+                        <a class="dropdown-item" href="#">Profile</a><a class="dropdown-item" href="{{route('user.setting')}}">Setting</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();"href="{{ route('logout') }}">{{ __('Logout') }}</a>
@@ -40,7 +40,7 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <a class="nav-link" href="index.html">
+                            <a class="nav-link" href="{{url('/dashboard')}}">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>Dashboard</a>
                             <?php 
                                 $isAdmin = Auth::user()->admin ; 
