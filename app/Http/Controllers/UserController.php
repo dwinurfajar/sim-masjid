@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
+
 use App\User;
 use Auth;
 
@@ -16,15 +17,18 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         return view('backend/dashboard');
     }
+
     public function setting()
     {
         $user = Auth::user();
         return view('backend/user/setting', ['user' => $user]);
     }
+
     public function changePassword(Request $request){
 
         $request->validate([
@@ -36,6 +40,21 @@ class UserController extends Controller
         User::find(Auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
 
         return redirect('/dashboard/account/setting')->with('status', 'Password changed succesfully');
+    }
+
+    public function uploadAvatar(Request $request){
+        $validatedData = $request->validate([
+            'avatar' => 'image|required|max:255',
+        ]);
+
+        $user = Auth::user();
+        
+        if($request->hasFile('avatar')){
+            $request->file('avatar')->move('uploads/avatars', $user->email);
+            $user->avatar = $user->email;
+            $user->save();
+        } 
+        return redirect('/dashboard/account/setting')->with('status', 'Upload succesfully');
     }
 
     /**
@@ -90,10 +109,23 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        User::where('id', $user->id)->update([
-                'name' => $request->name
+        if($request->has('name')){
+            $validatedData = $request->validate([
+                'name' => 'unique:users|required|max:255',
             ]);
-        return redirect('/dashboard/account/setting')->with('status', 'Username changed succesfully');
+            User::where('id', $user->id)->update([
+                    'name' => $request->name
+                ]);
+            return redirect('/dashboard/account/setting')->with('status', 'Username changed succesfully');
+        }elseif ($request->has('email')) {
+            $validatedData = $request->validate([
+                'email' => 'unique:users|required|email',  
+            ]);
+            User::where('id', $user->id)->update([
+                    'email' => $request->email
+                ]);
+            return redirect('/dashboard/account/setting')->with('status', 'Email changed succesfully');
+        }
     }
 
     /**

@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix'=>'admin', 'middleware'=>['admin','auth']], function(){
 
@@ -29,4 +29,5 @@ Route::group(['prefix'=>'dashboard', 'middleware'=>['auth']], function(){
 	Route::resource('user', 'UserController');
 	Route::get('account/setting', 'UserController@setting')->name('user.setting');
 	Route::post('change-password', 'UserController@changePassword')->name('change.password');
+	Route::post('upload-avatar', 'UserController@uploadAvatar')->name('upload.avatar');
 });
