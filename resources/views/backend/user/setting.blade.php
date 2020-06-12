@@ -50,10 +50,10 @@
 		      		@csrf
 		      		@method('PATCH')
 		      		<input style="padding : 5px" class="form-control" type="text" name="email" value="{{$user->email}}">
-		      		<label class="small">Enter for submit</label>
 		      		@error('email')
 					    <label class="error alert-danger small mt-2">{{ $message }}</label>
 					@enderror
+					<label class="small">Enter for submit</label>
 		      	</form>
 		      </td>
 		      <td class="col-1"><a href="javascript:void(0)" onclick="myFunctionEmail()"><i class="fas fa-edit"></i></a>
@@ -77,8 +77,17 @@
 		      	<form style="display: none;" id="password" method="post" action="{{ route('change.password') }}">
 		      		@csrf
 		      		<input style="padding : 3px" class="form-control mb-1" type="password" name="new_password" placeholder="New Password">
-		      		<input style="padding : 3px" class="form-control mb-1" type="password" name="new_confirm_password" placeholder="Confirm Password">
+		      		@error('new_password')
+					    <label class="error alert-danger small mt-2">{{ $message }}</label>
+					@enderror
+		      		<input style="padding : 3px" class="form-control mb-1" type="password" name="new_confirm_password" placeholder="Confirm New Password">
+		      		@error('new_confirm_password')
+					    <label class="error alert-danger small mt-2">{{ $message }}</label>
+					@enderror
 		      		<input style="padding : 3px" class="form-control mb-1" type="password" name="current_password" placeholder="Current Password">
+		      		@error('current_password')
+					    <label class="error alert-danger small mt-2">{{ $message }}</label>
+					@enderror
 		      		<button type="submit" class="badge badge-primary">Change Password</button>
 		      	</form>
 		      </td>

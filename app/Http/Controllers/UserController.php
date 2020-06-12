@@ -33,7 +33,7 @@ class UserController extends Controller
 
         $request->validate([
             'current_password' => ['required', new MatchOldPassword],
-            'new_password' => ['required'],
+            'new_password' => ['required', 'min:8'],
             'new_confirm_password' => ['same:new_password'],
         ]);
    
@@ -48,7 +48,7 @@ class UserController extends Controller
         ]);
 
         $user = Auth::user();
-        
+
         if($request->hasFile('avatar')){
             $request->file('avatar')->move('uploads/avatars', $user->email);
             $user->avatar = $user->email;
