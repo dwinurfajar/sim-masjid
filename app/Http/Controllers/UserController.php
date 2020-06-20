@@ -20,7 +20,7 @@ class UserController extends Controller
 
     public function index()
     {
-        return view('backend/dashboard');
+
     }
 
     public function setting()
@@ -39,7 +39,7 @@ class UserController extends Controller
    
         User::find(Auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
 
-        return redirect('/dashboard/account/setting')->with('status', 'Password changed succesfully');
+        return back()->with('status', 'Password changed succesfully');
     }
 
     public function uploadAvatar(Request $request){
@@ -54,7 +54,7 @@ class UserController extends Controller
             $user->avatar = $user->email;
             $user->save();
         } 
-        return redirect('/dashboard/account/setting')->with('status', 'Upload succesfully');
+        return back()->with('status', 'Upload succesfully');
     }
 
     /**
@@ -116,7 +116,7 @@ class UserController extends Controller
             User::where('id', $user->id)->update([
                     'name' => $request->name
                 ]);
-            return redirect('/dashboard/account/setting')->with('status', 'Username changed succesfully');
+            return back()->with('status', 'Username changed succesfully');
         }elseif ($request->has('email')) {
             $validatedData = $request->validate([
                 'email' => 'unique:users|required|email',  
@@ -124,7 +124,7 @@ class UserController extends Controller
             User::where('id', $user->id)->update([
                     'email' => $request->email
                 ]);
-            return redirect('/dashboard/account/setting')->with('status', 'Email changed succesfully');
+            return back()->with('status', 'Email changed succesfully');
         }
     }
 
