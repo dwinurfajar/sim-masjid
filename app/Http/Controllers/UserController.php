@@ -44,7 +44,7 @@ class UserController extends Controller
 
     public function uploadAvatar(Request $request){
         $validatedData = $request->validate([
-            'avatar' => 'image|required|max:255',
+            'avatar' => 'image|required|max:1024',
         ]);
 
         $user = Auth::user();
