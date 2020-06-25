@@ -86,7 +86,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = Auth::user();
+        return view('backend/user/profile', ['user' => $user]);
     }
 
     /**

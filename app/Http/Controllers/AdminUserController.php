@@ -65,7 +65,8 @@ class AdminUserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = DB::table('users')->where('id' , $id)->first();
+        return view('backend/user/profile', ['user' => $user]);
     }
 
     /**
@@ -101,6 +102,7 @@ class AdminUserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::destroy($id);
+        return back()->with('status', 'Succes');
     }
 }

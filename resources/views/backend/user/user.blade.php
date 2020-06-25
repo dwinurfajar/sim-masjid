@@ -41,7 +41,7 @@
                                     <td>{{ $usr->admin}}</td>
                                     
                                     <td class="text-center text-white">
-                                        <a type="button" href="jamaah/edit/{{$usr->id}}"  class="badge badge-primary"><i class="fas fa-info-circle mr-1"></i>Detail</a>
+                                        <a type="button" href="{{route('users.show', $usr->id)}}"  class="badge badge-primary"><i class="fas fa-info-circle mr-1"></i>Detail</a>
 
                                         <a type="button" href="{{route('users.edit', $usr->id)}}" class="badge badge-success"><i class="fas fa-edit mr-1"></i>Edit</a>
 
@@ -55,5 +55,43 @@
                     </div>
                 </div>
             </div>
+            <!-- Modal -->
+                <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <form action="{{route('users.destroy' , $usr->id )}}" id="deleteForm" method="post">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Hapus</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <p>Apakah anda yakin ingin menghapus data?</p>
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-dismiss="modal">Batal</button>
+                        <button type="submit" onclick="formSubmit()" class="btn btn-danger" data-dismiss="modal">Ya, Lanjutkan</button>
+                      </div>
+                    </div>
+                    </form>
+                  </div>
+                </div>
+                <script type="text/javascript">
+                 function deleteData(id)
+                 {
+                     var id = id;
+                     var url = 'users/:id';
+                     url = url.replace(':id', id);
+                     $("#deleteForm").attr('action', url);
+                 }
+
+                 function formSubmit()
+                 {
+                     $("#deleteForm").submit();
+                 }
+              </script>
 
 @endsection

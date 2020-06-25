@@ -19,7 +19,7 @@
       <table class="table">
 		  <thead>
 		    <tr>
-		      <th scope="col" colspan="3">{{$user->name}} profile's</th>
+		      <th scope="col" colspan="3">{{$user->name}} profile's setting</th>
 
 		    </tr>
 		  </thead>
