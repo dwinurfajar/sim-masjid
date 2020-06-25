@@ -144,7 +144,7 @@
         
     </div>
     <div class="col-sm-7">
-        <div class="col">
+        <div>
             <div class="form-group" >
                 <label for="exampleFormControlInput1">Alamat pada peta</label>
                 <body onload="initialize()" class="mt-1">

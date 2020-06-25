@@ -50,7 +50,7 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-users-cog"></i></div>Users</a>
                             @endif
                             <a class="nav-link" href="{{route('jamaah.index')}}">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>Jamaah</a>
+                            <div class="sb-nav-link-icon"><i class="fas fa-pray"></i></div>Jamaah</a>
 
                         </div>
                     </div>

@@ -3,8 +3,7 @@
 <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
 <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWe9SB74omaI4ptZ5c9Jph2kiSekvbmyU&callback=initMap" type="text/javascript"></script>
 -->
-
-    <div class="row">
+    <div>
         <div class="col-xl-3 col-md-6"> </div>
    </div>
         <a type="button" href="{{route('jamaah.create')}}" class="btn btn-primary mb-4"><i class="fas fa-plus-square mr-2"></i>Add jamaah</a>
@@ -101,8 +100,9 @@
 
             <div>
                 <label for="exampleFormControlInput1">Peta Persebaran Jamaah Masjid KH Ahmad Dahlan</label>
-                <div id="map" style="height: 400px; width: 900px;">
-                </div>
+
+               	<div class="col" id="map" style="height: 300px; width: 100%;"></div>
+
                 <script type="text/javascript">
                     
                     var obj = JSON.parse('<?php echo json_encode($jamaah) ?>')
