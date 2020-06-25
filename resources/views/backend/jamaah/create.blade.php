@@ -146,7 +146,7 @@
     <div class="col-sm-7">
         <div>
             <div class="form-group" >
-                <label for="exampleFormControlInput1">Alamat pada peta</label>
+                <label for="exampleFormControlInput1">Address on maps</label>
                 <body onload="initialize()" class="mt-1">
                     <div id="map_canvas" style="width:100%; height:250px"></div>
                     <div id="info" style="width:512px"></div>
