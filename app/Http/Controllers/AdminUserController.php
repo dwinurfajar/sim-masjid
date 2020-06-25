@@ -78,8 +78,7 @@ class AdminUserController extends Controller
     public function edit($id)
     {
         $user = DB::table('users')->where('id', $id)->first();
-        //dump($user);
-        return view('backend/user/setting', ['user'=> $user]);
+        return view('backend/user/usersetting', ['user'=> $user]);
     }
 
     /**
@@ -89,9 +88,41 @@ class AdminUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        if($request->has('name')){
+            $validatedData = $request->validate([
+                'name' => 'unique:users|required|max:255',
+            ]);
+            User::where('id', $user->id)->update([
+                    'name' => $request->name
+                ]);
+            return back()->with('status', 'Username changed succesfully');
+        }elseif ($request->has('email')) {
+            $validatedData = $request->validate([
+                'email' => 'unique:users|required|email',  
+            ]);
+            User::where('id', $user->id)->update([
+                    'email' => $request->email
+                ]);
+            return back()->with('status', 'Email changed succesfully');
+        }elseif ($request->has('admin')) {
+            $validatedData = $request->validate([
+                'admin' => 'required',  
+            ]);
+            User::where('id', $user->id)->update([
+                    'admin' => $request->admin
+                ]);
+            return back()->with('status', 'Role changed succesfully');
+        }elseif ($request->has('password')) {
+            $validatedData = $request->validate([
+                'password' => 'required|min:8',  
+            ]);
+            User::where('id', $user->id)->update([
+                    'password' => Hash::make($request->password)
+                ]);
+            return back()->with('status', 'Password changed succesfully');
+        }
     }
 
     /**

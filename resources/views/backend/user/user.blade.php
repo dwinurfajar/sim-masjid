@@ -4,7 +4,7 @@
 <div class="row">
         <div class="col-xl-3 col-md-6"> </div>
    </div>
-        <a type="button" href="{{ route('users.create') }}" class="btn btn-primary mb-4"><i class="fas fa-plus-square mr-2"></i>Tambah Data</a>
+        <a type="button" href="{{ route('users.create') }}" class="btn btn-primary mb-4"><i class="fas fa-plus-square mr-2"></i>Add user</a>
         <div class="card mb-4">
             <div class="card-header"><i class="fas fa-table mr-1"></i>Users</div>
                 <div class="card-body ">
@@ -38,7 +38,14 @@
                                     <td class="text-center" scope="row">{{ $loop->iteration}}</td>
                                     <td>{{ $usr->name}}</td>
                                     <td>{{ $usr->email}}</td>
-                                    <td>{{ $usr->admin}}</td>
+                                    <td class="text-center"><?php 
+                                    $isAdmin = $usr->admin ; 
+                                ?>
+                                @if($isAdmin == 1 )
+                                    Admin
+                                @else
+                                    User
+                                @endif</td>
                                     
                                     <td class="text-center text-white">
                                         <a type="button" href="{{route('users.show', $usr->id)}}"  class="badge badge-primary"><i class="fas fa-info-circle mr-1"></i>Detail</a>

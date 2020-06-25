@@ -5,7 +5,7 @@
       <img style="width: 240px; height: 240px; border-radius: 50%" src="/uploads/avatars/{{ $user->avatar }}" >
       
     </div>
-    <div class="col-sm">
+    <div class="col-sm-6">
       <table class="table">
 		  <thead>
 		    <tr>

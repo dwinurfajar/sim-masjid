@@ -30,4 +30,6 @@ Route::group(['prefix'=>'dashboard', 'middleware'=>['auth']], function(){
 	Route::get('account/setting', 'UserController@setting')->name('user.setting');
 	Route::post('change-password', 'UserController@changePassword')->name('change.password');
 	Route::post('upload-avatar', 'UserController@uploadAvatar')->name('upload.avatar');
+
+	Route::resource('jamaah', 'JamaahController');
 });
