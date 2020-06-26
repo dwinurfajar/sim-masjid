@@ -48,9 +48,9 @@
                                     <td class="text-center">
                                       <?php $aktif = $jmh->aktif; ?>
                                       @if($aktif == 1 )
-                                          Iya
+                                          Aktif
                                       @else
-                                          Tidak
+                                          Pasif
                                       @endif
                                     </td>
                                     <td class="text-center">
