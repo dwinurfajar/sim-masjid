@@ -1,4 +1,68 @@
-@extends('backend/master')
-@section('content')
+	@extends('backend/master')
+	@section('content')
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+	<script src="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.js"></script>
+	<link href="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.css" rel="stylesheet" />
+	<div class="row">
+	    <div class="col-sm-5">
+	        <form method="post" action="{{route('jamaah.store')}}">
+	            @csrf
+	            <div class="row">
+	                <div class="col">
+	                    <div class="form-group row mb-2">
+	                        <label class="col-sm-4 col-form-label font-weight-bold">Name</label>
+	                        <label class="col-sm-8 col-form-label">: {{$jamaah->name}}</label>
+	                    </div>
+	                    <div class="form-group row mb-2">
+	                        <label  class="col-sm-4 col-form-label font-weight-bold">Gender</label>
+	                        <label class="col-sm-8 col-form-label">: {{$jamaah->gender}}</label>
+	                    </div>
+	                    <div class="form-group row mb-2">
+	                        <label  class="col-sm-4 col-form-label font-weight-bold">Phone</label>
+	                        <label class="col-sm-8 col-form-label">: {{$jamaah->phone}}</label>
+	                    </div>
+	                    <div class="form-group row mb-2">
+	                        <label  class="col-sm-4 col-form-label font-weight-bold">Address</label>
+	                        <label class="col-sm-8 col-form-label">: {{$jamaah->address}}</label>
+	                    </div>
+	                    <div class="form-group row mb-2">
+	                        <label class="col-sm-4 col-form-label font-weight-bold">Lattitude</label>
+	                        <label class="col-sm-8 col-form-label">: {{$jamaah->latt}}</label>
+	                    </div>
+	                    <div class="form-group row mb-2">
+	                        <label class="col-sm-4 col-form-label font-weight-bold">Longitude</label>
+	                        <label class="col-sm-8 col-form-label">: {{$jamaah->long}}</label>
+	                    </div>
+	                </div>   
+	            </div>      
+	        
+	    </div>
+	    <div class="col-sm-7">
+        <div>
+            <div class="form-group" >
+                <label>Address on maps</label>
+                <body >
+                    <div id="map" style="width:100%; height:250px"></div>
+                </body>
+            </div>
+        </div> 
+    </div>
+	</div>
+	<script>
+		<?php $latt = $jamaah->latt; $long = $jamaah->long ?>
+						var latt = '<?php echo($latt)?>'
+						var long = '<?php echo($long)?>'
 
-@endsection
+						mapboxgl.accessToken = 'pk.eyJ1IjoiZHluYXRpYyIsImEiOiJja2JpcnpyaHQwaTcwMnNsdHZweTc2eXQ0In0.2dDt6graznsFCKEN64n1ZQ';
+						var map = new mapboxgl.Map({
+						container: 'map',
+						style: 'mapbox://styles/mapbox/streets-v11',
+						center: [112.60905970968918,-7.898348386333325],
+						zoom: 14
+						});
+						 
+						var marker = new mapboxgl.Marker()
+						.setLngLat([long, latt])
+						.addTo(map);
+	</script>
+	@endsection

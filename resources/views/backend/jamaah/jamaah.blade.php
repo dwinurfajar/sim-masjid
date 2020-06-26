@@ -44,7 +44,7 @@
                                     <td class="text-center text-white">
                                         <a type="button" href="{{route('jamaah.show', $jmh->id)}}"  class="badge badge-primary"><i class="fas fa-info-circle mr-1"></i>Detail</a>
 
-                                        <a type="button" href="jamaah/edit/{{$jmh->id}}" class="badge badge-success"><i class="fas fa-edit mr-1"></i>Edit</a>
+                                        <a type="button" href="{{route('jamaah.edit', $jmh->id)}}" class="badge badge-success"><i class="fas fa-edit mr-1"></i>Edit</a>
 
                                         <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$jmh->id}})"data-target="#DeleteModal" class="badge badge-danger"><i class="fa fa-trash mr-1"></i> Delete</a>
                                      

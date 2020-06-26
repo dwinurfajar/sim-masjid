@@ -66,7 +66,8 @@ class JamaahController extends Controller
      */
     public function show(Jamaah $jamaah)
     {
-        return view('backend/jamaah/show');
+        $jamaah = DB::table('jamaahs')->where('id', $jamaah->id)->first();
+        return view('backend/jamaah/show', ['jamaah' => $jamaah]);
     }
 
     /**
@@ -77,7 +78,8 @@ class JamaahController extends Controller
      */
     public function edit(Jamaah $jamaah)
     {
-        //
+        $jamaah = DB::table('jamaahs')->where('id', $jamaah->id)->first();
+        return view('backend/jamaah/edit', ['jamaah' => $jamaah]);
     }
 
     /**
@@ -89,7 +91,24 @@ class JamaahController extends Controller
      */
     public function update(Request $request, Jamaah $jamaah)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'gender' => 'required',
+            'phone' => 'required',
+            'address' => 'required',
+            'latt' => 'required',
+            'long' => 'required',
+        ]);
+
+        Jamaah::where('id', $jamaah->id)->update([
+            'name' => $request->name,
+            'gender' => $request->gender,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'latt' => $request->latt,
+            'long' => $request->long,
+        ]);
+        return back()->with('status', 'Changed succesfully');
     }
 
     /**
@@ -100,6 +119,7 @@ class JamaahController extends Controller
      */
     public function destroy(Jamaah $jamaah)
     {
-        //
+        Jamaah::destroy($jamaah->id);
+        return back()->with('status', 'Succes');
     }
 }

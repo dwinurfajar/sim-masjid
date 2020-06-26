@@ -1,19 +1,20 @@
-@extends('backend/master')
-@section('content')
-<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+	@extends('backend/master')
+	@section('content')
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
 <script src="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.js"></script>
 <link href="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.css" rel="stylesheet" />
 
 <div class="row">
     <div class="col-sm-5">
-        <form method="post" action="{{route('jamaah.store')}}">
+        <form method="post" action="{{route('jamaah.update', $jamaah->id)}}">
             @csrf
+            @method('PATCH')
             <div class="row">
                 <div class="col">
                     <div class="form-group row mb-2">
                         <label for="inputPassword" class="col-sm-4 col-form-label">Name</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Name">
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{$jamaah->name}}">
                             @error('name')
                             	<span class="invalid-feedback" role="alert">
                                 	<strong>{{ $message }}</strong>
@@ -24,8 +25,8 @@
                     <div class="form-group row mb-2">
                         <label for="inputPassword" class="col-sm-4 col-form-label">Gender</label>
                         <div class="col-sm-8">
-                            <select class="custom-select @error('gender') is-invalid @enderror" name="gender">
-                                <option selected disabled value="">Choose</option>
+                            <select class="custom-select @error('gender') is-invalid @enderror" name="gender" >
+                            	<option value="{{$jamaah->gender}}">{{$jamaah->gender}}</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                             </select>
@@ -39,7 +40,7 @@
                     <div class="form-group row mb-2">
                         <label for="inputPassword" class="col-sm-4 col-form-label">Phone</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" placeholder="Phone">
+                            <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{$jamaah->phone}}">
                             @error('phone')
                             	<span class="invalid-feedback" role="alert">
                                 	<strong>{{ $message }}</strong>
@@ -50,7 +51,7 @@
                     <div class="form-group row mb-2">
                         <label for="inputPassword" class="col-sm-4 col-form-label">Address</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control @error('address') is-invalid @enderror" name="address" placeholder="Address">
+                            <input type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{$jamaah->address}}">
                             @error('address')
                             	<span class="invalid-feedback" role="alert">
                                 	<strong>{{ $message }}</strong>
@@ -61,7 +62,7 @@
                     <div class="form-group row mb-2">
                         <label for="inputPassword" class="col-sm-4 col-form-label">Lattitude</label>
                         <div class="col-sm-8">
-                            <input type="text" m class="form-control @error('latt') is-invalid @enderror" id="latt" name="latt" placeholder="Lattitude">
+                            <input type="text" m class="form-control @error('latt') is-invalid @enderror" id="latt" name="latt" value="{{$jamaah->latt}}">
                             @error('latt')
                             	<span class="invalid-feedback" role="alert">
                                 	<strong>{{ $message }}</strong>
@@ -72,7 +73,7 @@
                     <div class="form-group row mb-2">
                         <label for="inputPassword" class="col-sm-4 col-form-label">Longitude</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control @error('long') is-invalid @enderror" id="long" name="long" placeholder="Longitude">
+                            <input type="text" class="form-control @error('long') is-invalid @enderror" id="long" name="long" value="{{$jamaah->long}}">
                             @error('long')
                             	<span class="invalid-feedback" role="alert">
                                 	<strong>{{ $message }}</strong>
@@ -124,4 +125,4 @@
         marker.setLngLat([long, latt]).addTo(map);
     });
 </script>
-@endsection
+	@endsection
