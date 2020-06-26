@@ -46,7 +46,7 @@
                                 $isAdmin = Auth::user()->admin ; 
                             ?>
                             @if($isAdmin == 1 )
-                                <a class="nav-link" href="{{route('users.index')}}">
+                                <a class="nav-link" href="{{route('jamaah.index')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-users-cog"></i></div>Users</a>
                             @endif
                             <a class="nav-link" href="{{route('jamaah.index')}}">
