@@ -10,20 +10,27 @@
 	            <div class="row">
 	                <div class="col">
 	                    <div class="form-group row mb-2">
-	                        <label class="col-sm-4 col-form-label font-weight-bold">Name</label>
-	                        <label class="col-sm-8 col-form-label">: {{$jamaah->name}}</label>
+	                        <label class="col-sm-4 col-form-label font-weight-bold">Nama</label>
+	                        <label class="col-sm-8 col-form-label">: {{$jamaah->nama}}</label>
 	                    </div>
 	                    <div class="form-group row mb-2">
-	                        <label  class="col-sm-4 col-form-label font-weight-bold">Gender</label>
-	                        <label class="col-sm-8 col-form-label">: {{$jamaah->gender}}</label>
+	                        <label  class="col-sm-4 col-form-label font-weight-bold">Jenis Kelamin</label>
+	                        <label class="col-sm-8 col-form-label">: 
+	                        	<?php $isAdmin = $jamaah->jenisKelamin; ?>
+                                      @if($isAdmin == 1 )
+                                          Laki-laki
+                                      @else
+                                          Perempuan
+                                      @endif
+	                        </label>
 	                    </div>
 	                    <div class="form-group row mb-2">
-	                        <label  class="col-sm-4 col-form-label font-weight-bold">Phone</label>
-	                        <label class="col-sm-8 col-form-label">: {{$jamaah->phone}}</label>
+	                        <label  class="col-sm-4 col-form-label font-weight-bold">Telephone</label>
+	                        <label class="col-sm-8 col-form-label">: {{$jamaah->telephone}}</label>
 	                    </div>
 	                    <div class="form-group row mb-2">
-	                        <label  class="col-sm-4 col-form-label font-weight-bold">Address</label>
-	                        <label class="col-sm-8 col-form-label">: {{$jamaah->address}}</label>
+	                        <label  class="col-sm-4 col-form-label font-weight-bold">Alamat</label>
+	                        <label class="col-sm-8 col-form-label">: {{$jamaah->alamat}}</label>
 	                    </div>
 	                    <div class="form-group row mb-2">
 	                        <label class="col-sm-4 col-form-label font-weight-bold">Lattitude</label>
@@ -33,6 +40,28 @@
 	                        <label class="col-sm-4 col-form-label font-weight-bold">Longitude</label>
 	                        <label class="col-sm-8 col-form-label">: {{$jamaah->long}}</label>
 	                    </div>
+	                    <div class="form-group row mb-2">
+	                        <label class="col-sm-4 col-form-label font-weight-bold">Jamaah Aktif</label>
+	                        <label class="col-sm-8 col-form-label">: 
+	                        	<?php $isAdmin = $jamaah->aktif; ?>
+                                      @if($isAdmin == 1 )
+                                          Aktif
+                                      @else
+                                          Pasif
+                                      @endif
+	                        </label>
+	                    </div>
+	                    <div class="form-group row mb-2">
+	                        <label class="col-sm-4 col-form-label font-weight-bold">Penerima zakat</label>
+	                        <label class="col-sm-8 col-form-label">: 
+	                        	<?php $isAdmin = $jamaah->zakat; ?>
+                                      @if($isAdmin == 1 )
+                                          Iya
+                                      @else
+                                          Tidak
+                                      @endif
+	                        </label>
+	                    </div>
 	                </div>   
 	            </div>      
 	        
@@ -40,9 +69,9 @@
 	    <div class="col-sm-7">
         <div>
             <div class="form-group" >
-                <label>Address on maps</label>
+                <label>Alamat pada peta</label>
                 <body >
-                    <div id="map" style="width:100%; height:250px"></div>
+                    <div id="map" style="width:100%; height:325px"></div>
                 </body>
             </div>
         </div> 

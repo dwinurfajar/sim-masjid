@@ -38,24 +38,24 @@ class JamaahController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'gender' => 'required',
-            'phone' => 'required',
-            'address' => 'required',
+            'nama' => 'required',
+            'jenisKelamin' => 'required',
+            'telephone' => 'required',
+            'alamat' => 'required',
             'latt' => 'required',
             'long' => 'required',
         ]);
 
         $jamaah = new Jamaah;
-        $jamaah->name = $request->name;
-        $jamaah->gender = $request->gender;
-        $jamaah->phone = $request->phone;
-        $jamaah->address = $request->address;
+        $jamaah->nama = $request->nama;
+        $jamaah->jenisKelamin = $request->jenisKelamin;
+        $jamaah->telephone = $request->telephone;
+        $jamaah->alamat = $request->alamat;
         $jamaah->latt = $request->latt;
         $jamaah->long = $request->long;
         $jamaah->save();
 
-        return redirect('/dashboard/jamaah')->with('status', 'Succesfully');
+        return redirect('/dashboard/jamaah')->with('status', 'Berhasil disimpan');
     }
 
     /**
@@ -92,23 +92,27 @@ class JamaahController extends Controller
     public function update(Request $request, Jamaah $jamaah)
     {
         $request->validate([
-            'name' => 'required',
-            'gender' => 'required',
-            'phone' => 'required',
-            'address' => 'required',
+            'nama' => 'required',
+            'jenisKelamin' => 'required',
+            'telephone' => 'required',
+            'alamat' => 'required',
             'latt' => 'required',
             'long' => 'required',
+            'aktif' => 'required',
+            'zakat' => 'required',
         ]);
 
         Jamaah::where('id', $jamaah->id)->update([
-            'name' => $request->name,
-            'gender' => $request->gender,
-            'phone' => $request->phone,
-            'address' => $request->address,
+            'nama' => $request->nama,
+            'jenisKelamin' => $request->jenisKelamin,
+            'telephone' => $request->telephone,
+            'alamat' => $request->alamat,
             'latt' => $request->latt,
             'long' => $request->long,
+            'aktif' => $request->aktif,
+            'zakat' => $request->zakat,
         ]);
-        return back()->with('status', 'Changed succesfully');
+        return back()->with('status', 'Berhasil diubah');
     }
 
     /**
@@ -120,6 +124,10 @@ class JamaahController extends Controller
     public function destroy(Jamaah $jamaah)
     {
         Jamaah::destroy($jamaah->id);
-        return back()->with('status', 'Succes');
+        return back()->with('status', 'Berhasil dihapus');
+    }
+    public function active()
+    {
+
     }
 }

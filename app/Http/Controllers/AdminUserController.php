@@ -54,7 +54,7 @@ class AdminUserController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
-        return redirect()->route('users.index')->with('status', 'Succes');
+        return redirect()->route('users.index')->with('status', 'Berhasil disimpan');
     }
 
     /**
@@ -97,7 +97,7 @@ class AdminUserController extends Controller
             User::where('id', $user->id)->update([
                     'name' => $request->name
                 ]);
-            return back()->with('status', 'Username changed succesfully');
+            return back()->with('status', 'Nama berhasil diubah');
         }elseif ($request->has('email')) {
             $validatedData = $request->validate([
                 'email' => 'unique:users|required|email',  
@@ -105,7 +105,7 @@ class AdminUserController extends Controller
             User::where('id', $user->id)->update([
                     'email' => $request->email
                 ]);
-            return back()->with('status', 'Email changed succesfully');
+            return back()->with('status', 'Email Nama berhasil diubah');
         }elseif ($request->has('admin')) {
             $validatedData = $request->validate([
                 'admin' => 'required',  
@@ -113,7 +113,7 @@ class AdminUserController extends Controller
             User::where('id', $user->id)->update([
                     'admin' => $request->admin
                 ]);
-            return back()->with('status', 'Role changed succesfully');
+            return back()->with('status', 'Role Nama berhasil diubah');
         }elseif ($request->has('password')) {
             $validatedData = $request->validate([
                 'password' => 'required|min:8',  
@@ -121,7 +121,7 @@ class AdminUserController extends Controller
             User::where('id', $user->id)->update([
                     'password' => Hash::make($request->password)
                 ]);
-            return back()->with('status', 'Password changed succesfully');
+            return back()->with('status', 'Password Nama berhasil diubah');
         }
     }
 
@@ -134,6 +134,6 @@ class AdminUserController extends Controller
     public function destroy($id)
     {
         User::destroy($id);
-        return back()->with('status', 'Succes');
+        return back()->with('status', 'Berhasil dihapus');
     }
 }

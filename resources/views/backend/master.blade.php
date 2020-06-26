@@ -22,10 +22,10 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img style="width: 40px; height: 40px; border-radius: 50%" src="/uploads/avatars/{{ Auth::user()->avatar }}" > {{ Auth::user()->name }} </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="{{route('user.show', Auth::user()->id)}}">Profile</a><a class="dropdown-item" href="{{route('user.setting')}}">Setting</a>
+                        <a class="dropdown-item" href="{{route('user.show', Auth::user()->id)}}">Profil</a><a class="dropdown-item" href="{{route('user.setting')}}">Pengaturan</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();"href="{{ route('logout') }}">{{ __('Logout') }}</a>
+                        document.getElementById('logout-form').submit();"href="{{ route('logout') }}">{{ __('Keluar') }}</a>
 
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf

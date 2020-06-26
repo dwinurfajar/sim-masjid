@@ -39,7 +39,7 @@ class UserController extends Controller
    
         User::find(Auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
 
-        return back()->with('status', 'Password changed succesfully');
+        return back()->with('status', 'Password berhasil diubah');
     }
 
     public function uploadAvatar(Request $request){
@@ -54,7 +54,7 @@ class UserController extends Controller
             $user->avatar = $user->email;
             $user->save();
         } 
-        return back()->with('status', 'Upload succesfully');
+        return back()->with('status', 'Berhasil diunggah');
     }
 
     /**

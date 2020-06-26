@@ -7,7 +7,7 @@
       	<form enctype="multipart/form-data" method="post" action="{{route('upload.avatar')}}">
       		@csrf
 	      	<input class="small ml-5 mt-2" type="file" name="avatar">
-	      	<button type="submit" class="badge badge-primary">upload</button>
+	      	<button type="submit" class="badge badge-primary">unggah</button>
 	      	@error('avatar')
 				<label class="error alert-danger small mt-2">{{ $message }}</label>
 			@enderror
@@ -19,13 +19,13 @@
       <table class="table">
 		  <thead>
 		    <tr>
-		      <th scope="col" colspan="3">{{$user->name}} profile's setting</th>
+		      <th scope="col" colspan="3">Pengaturan profil {{$user->name}}</th>
 
 		    </tr>
 		  </thead>
 		  <tbody>
 		    <tr class="d-flex">
-		      <td class="col-3">Username</td>
+		      <td class="col-3">Nama</td>
 		      <td class="col-8">
 		      	{{$user->name}}
 		      	<form style="display: none;" id="name" method="post" action="{{route('user.update', $user->id)}}">
@@ -73,22 +73,22 @@
 		    <tr class="d-flex">
 		      <td class="col-3">Password</td>
 		      <td class="col-8">
-		      	Not show
+		      	Tidak ditampilkan
 		      	<form style="display: none;" id="password" method="post" action="{{ route('change.password') }}">
 		      		@csrf
-		      		<input style="padding : 3px" class="form-control mb-1" type="password" name="new_password" placeholder="New Password">
+		      		<input style="padding : 3px" class="form-control mb-1" type="password" name="new_password" placeholder="Password Baru">
 		      		@error('new_password')
 					    <label class="error alert-danger small mt-2">{{ $message }}</label>
 					@enderror
-		      		<input style="padding : 3px" class="form-control mb-1" type="password" name="new_confirm_password" placeholder="Confirm New Password">
+		      		<input style="padding : 3px" class="form-control mb-1" type="password" name="new_confirm_password" placeholder="Konfirmasi Password">
 		      		@error('new_confirm_password')
 					    <label class="error alert-danger small mt-2">{{ $message }}</label>
 					@enderror
-		      		<input style="padding : 3px" class="form-control mb-1" type="password" name="current_password" placeholder="Current Password">
+		      		<input style="padding : 3px" class="form-control mb-1" type="password" name="current_password" placeholder="Password lama">
 		      		@error('current_password')
 					    <label class="error alert-danger small mt-2">{{ $message }}</label>
 					@enderror
-		      		<button type="submit" class="badge badge-primary">Change Password</button>
+		      		<button type="submit" class="badge badge-primary">Ubah Password</button>
 		      	</form>
 		      </td>
 		      <td class="col-1"><a href="javascript:void(0)" onclick="myFunctionPassword()"><i class="fas fa-edit"></i></a>

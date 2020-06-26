@@ -4,32 +4,28 @@
 <div class="row">
         <div class="col-xl-3 col-md-6"> </div>
    </div>
-        <a type="button" href="{{ route('users.create') }}" class="btn btn-primary mb-4"><i class="fas fa-plus-square mr-2"></i>Add user</a>
+        <a type="button" href="{{ route('users.create') }}" class="btn btn-primary mb-4"><i class="fas fa-plus-square mr-2"></i>Tambah user</a>
         <div class="card mb-4">
-            <div class="card-header"><i class="fas fa-table mr-1"></i>Users</div>
+            <div class="card-header"><i class="fas fa-table mr-1"></i>Daftar User</div>
                 <div class="card-body ">
                     <div class="table-responsive ">
                         <table class="table table-bordered " id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr class="text-center">
                                     <th>No</th>
-                                    <th>Username</th>
+                                    <th>Nama</th>
                                     <th>Email</th>
-                                    <th>Role</th>
-
-                                    
-                                    <th>Action</th>
+                                    <th>Role</th>                    
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr class="text-center">
                                     <th>No</th>
-                                    <th>Username</th>
+                                    <th>Nama</th>
                                     <th>Email</th>
-                                    <th>Role</th>
-
-                                    
-                                    <th>Action</th>
+                                    <th>Role</th>   
+                                    <th>Aksi</th>
                                 </tr>
                             </tfoot>
                             <tbody>
@@ -52,7 +48,7 @@
 
                                         <a type="button" href="{{route('users.edit', $usr->id)}}" class="badge badge-success"><i class="fas fa-edit mr-1"></i>Edit</a>
 
-                                        <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$usr->id}})"data-target="#DeleteModal" class="badge badge-danger"><i class="fa fa-trash mr-1"></i> Delete</a>
+                                        <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$usr->id}})"data-target="#DeleteModal" class="badge badge-danger"><i class="fa fa-trash mr-1"></i>Hapus</a>
                                      
                                     </td>
                                 </tr>

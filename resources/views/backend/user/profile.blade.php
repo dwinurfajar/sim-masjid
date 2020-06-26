@@ -9,12 +9,12 @@
       <table class="table">
 		  <thead>
 		    <tr>
-		      <th scope="col" colspan="3">{{$user->name}} profile's</th>
+		      <th scope="col" colspan="3">Profil {{$user->name}}</th>
 		    </tr>
 		  </thead>
 		  <tbody>
 		    <tr class="d-flex">
-		      <td class="col-3">Username</td>
+		      <td class="col-3">Nama</td>
 		      <td class="col-8">
 		      	{{$user->name}}	
 		      </td>
@@ -39,7 +39,7 @@
 		    <tr class="d-flex">
 		      <td class="col-3">Password</td>
 		      <td class="col-8">
-		      	Not show	
+		      	Tidak ditampilkan	
 		      </td>
 		    </tr>
 		  </tbody>

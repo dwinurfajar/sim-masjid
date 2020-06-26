@@ -11,10 +11,10 @@
             <div class="row">
                 <div class="col">
                     <div class="form-group row mb-2">
-                        <label for="inputPassword" class="col-sm-4 col-form-label">Name</label>
+                        <label for="inputPassword" class="col-sm-4 col-form-label">Nama</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Name">
-                            @error('name')
+                            <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" placeholder="Nama">
+                            @error('nama')
                             	<span class="invalid-feedback" role="alert">
                                 	<strong>{{ $message }}</strong>
                             	</span>
@@ -22,14 +22,14 @@
                         </div>
                     </div>
                     <div class="form-group row mb-2">
-                        <label for="inputPassword" class="col-sm-4 col-form-label">Gender</label>
+                        <label for="inputPassword" class="col-sm-4 col-form-label">Jenis Kelamin</label>
                         <div class="col-sm-8">
-                            <select class="custom-select @error('gender') is-invalid @enderror" name="gender">
-                                <option selected disabled value="">Choose</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
+                            <select class="custom-select @error('jenisKelamin') is-invalid @enderror" name="jenisKelamin">
+                                <option selected disabled value="">Pilih</option>
+                                <option value="1">Laki-laki</option>
+                                <option value="0">Perempuan</option>
                             </select>
-                            @error('gender')
+                            @error('jenisKelamin')
                             	<span class="invalid-feedback" role="alert">
                                 	<strong>{{ $message }}</strong>
                             	</span>
@@ -37,10 +37,10 @@
                         </div>
                     </div>
                     <div class="form-group row mb-2">
-                        <label for="inputPassword" class="col-sm-4 col-form-label">Phone</label>
+                        <label for="inputPassword" class="col-sm-4 col-form-label">Telephone</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" placeholder="Phone">
-                            @error('phone')
+                            <input type="text" class="form-control @error('telephone') is-invalid @enderror" name="telephone" placeholder="Telephone">
+                            @error('telephone')
                             	<span class="invalid-feedback" role="alert">
                                 	<strong>{{ $message }}</strong>
                             	</span>
@@ -48,10 +48,10 @@
                         </div>
                     </div>
                     <div class="form-group row mb-2">
-                        <label for="inputPassword" class="col-sm-4 col-form-label">Address</label>
+                        <label for="inputPassword" class="col-sm-4 col-form-label">Alamat</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control @error('address') is-invalid @enderror" name="address" placeholder="Address">
-                            @error('address')
+                            <input type="text" class="form-control @error('alamat') is-invalid @enderror" name="alamat" placeholder="Alamat">
+                            @error('alamat')
                             	<span class="invalid-feedback" role="alert">
                                 	<strong>{{ $message }}</strong>
                             	</span>
@@ -89,7 +89,7 @@
     <div class="col-sm-7">
         <div>
             <div class="form-group" >
-                <label>Address on maps</label>
+                <label>Alamat pada peta</label>
                 <body >
                     <div id="map" style="width:100%; height:250px"></div>
                 </body>
@@ -99,8 +99,8 @@
 </div>
 <div class="row">
     <div class="col text-center">
-        <a href="{{route('jamaah.index')}}" class="btn btn-danger col-sm-2 mb-1" type="button"><i class="fas fa-window-close mr-1"></i>Cancel</a>
-        <button class="btn btn-primary col-sm-2 mb-1" type="submit"><i class="fas fa-check-square mr-1"></i>Save</button>
+        <a href="{{route('jamaah.index')}}" class="btn btn-danger col-sm-2 mb-1" type="button"><i class="fas fa-window-close mr-1"></i>Batal</a>
+        <button class="btn btn-primary col-sm-2 mb-1" type="submit"><i class="fas fa-check-square mr-1"></i>Simpan</button>
         </form>
     </div>  
 </div>

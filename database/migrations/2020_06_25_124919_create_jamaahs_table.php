@@ -15,10 +15,12 @@ class CreateJamaahsTable extends Migration
     {
         Schema::create('jamaahs', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('gender');
-            $table->string('phone');
-            $table->string('address');
+            $table->string('nama');
+            $table->boolean('jenisKelamin');
+            $table->string('telephone');
+            $table->string('alamat');
+            $table->boolean('aktif')->default('0');
+            $table->boolean('zakat')->default('0');
             $table->string('latt');
             $table->string('long');
             $table->timestamps();

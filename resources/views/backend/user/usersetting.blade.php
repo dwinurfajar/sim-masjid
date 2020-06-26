@@ -7,7 +7,7 @@
       	<form enctype="multipart/form-data" method="post" action="{{route('upload.avatar')}}">
       		@csrf
 	      	<input class="small ml-5 mt-2" type="file" name="avatar">
-	      	<button type="submit" class="badge badge-primary">upload</button>
+	      	<button type="submit" class="badge badge-primary">unggah</button>
 	      	@error('avatar')
 				<label class="error alert-danger small mt-2">{{ $message }}</label>
 			@enderror
@@ -19,13 +19,13 @@
       <table class="table">
 		  <thead>
 		    <tr>
-		      <th scope="col" colspan="3">{{$user->name}} profile's setting</th>
+		      <th scope="col" colspan="3">Edit profile {{$user->name}}</th>
 
 		    </tr>
 		  </thead>
 		  <tbody>
 		    <tr class="d-flex">
-		      <td class="col-3">Username</td>
+		      <td class="col-3">Nama</td>
 		      <td class="col-8">
 		      	{{$user->name}}
 		      	<form style="display: none;" id="name" method="post" action="{{route('users.update', $user->id)}}">
@@ -76,7 +76,7 @@
 	                        <option value="1">Admin</option>
 	                        <option value="0">User</option>
 	                    </select>
-	                    <button type="submit" class="badge badge-primary">Change Role</button>
+	                    <button type="submit" class="badge badge-primary">Ubah Role</button>
 	                </form>
 	            </td>
 		      <td class="col-1"><a href="javascript:void(0)" onclick="myFunctionRole()"><i class="fas fa-edit"></i></a>
@@ -84,15 +84,15 @@
 		    <tr class="d-flex">
 		      <td class="col-3">Password</td>
 		      <td class="col-8">
-		      	Not show
+		      	Tidak ditampilkan
 		      	<form style="display: none;" id="password" method="post" action="{{ route('users.update', $user->id)}}">
 		      		@csrf
 		      		@method('PATCH')
-		      		<input style="padding : 3px" class="form-control mb-1" type="password" name="password" placeholder="New Password">
+		      		<input style="padding : 3px" class="form-control mb-1" type="password" name="password" placeholder="Password Baru">
 		      		@error('password')
 					    <label class="error alert-danger small mt-2">{{ $message }}</label>
 					@enderror
-		      		<button type="submit" class="badge badge-primary">Change Password</button>
+		      		<button type="submit" class="badge badge-primary">Ubah Password</button>
 		      	</form>
 		      </td>
 		      <td class="col-1"><a href="javascript:void(0)" onclick="myFunctionPassword()"><i class="fas fa-edit"></i></a>
