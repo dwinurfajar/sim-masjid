@@ -82,6 +82,36 @@
                         	@enderror
                         </div>
                     </div>
+                    <div class="form-group row mb-2">
+                        <label for="inputPassword" class="col-sm-4 col-form-label">Jamaah Aktif</label>
+                        <div class="col-sm-8">
+                            <select class="custom-select @error('aktif') is-invalid @enderror" name="aktif">
+                                <option selected disabled value="">Pilih</option>
+                                <option value="1">Aktif</option>
+                                <option value="0">Pasif</option>
+                            </select>
+                            @error('aktif')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group row mb-2">
+                        <label for="inputPassword" class="col-sm-4 col-form-label">Penerima Zakat</label>
+                        <div class="col-sm-8">
+                            <select class="custom-select @error('zakat') is-invalid @enderror" name="zakat">
+                                <option selected disabled value="">Pilih</option>
+                                <option value="1">Iya</option>
+                                <option value="0">Tidak</option>
+                            </select>
+                            @error('zakat')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
 
                 </div>
                 
@@ -93,7 +123,7 @@
             <div class="form-group" >
                 <label>Alamat pada peta</label>
                 <body >
-                    <div id="map" style="width:100%; height:250px"></div>
+                    <div id="map" style="width:100%; height:325px"></div>
                 </body>
             </div>
         </div> 

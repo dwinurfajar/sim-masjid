@@ -44,6 +44,8 @@ class JamaahController extends Controller
             'alamat' => 'required',
             'latt' => 'required',
             'long' => 'required',
+            'aktif' => 'required',
+            'zakat' => 'required',
         ]);
 
         $jamaah = new Jamaah;
@@ -53,6 +55,8 @@ class JamaahController extends Controller
         $jamaah->alamat = $request->alamat;
         $jamaah->latt = $request->latt;
         $jamaah->long = $request->long;
+        $jamaah->aktif = $request->aktif;
+        $jamaah->zakat = $request->zakat;
         $jamaah->save();
 
         return redirect('/dashboard/jamaah')->with('status', 'Berhasil disimpan');
