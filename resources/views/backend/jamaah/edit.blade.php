@@ -37,7 +37,7 @@
                                 <option value="1">Laki-laki</option>
                                 <option value="0">Perempuan</option>
                             </select>
-                            @error('gender')
+                            @error('jenisKelamin')
                             	<span class="invalid-feedback" role="alert">
                                 	<strong>{{ $message }}</strong>
                             	</span>
@@ -92,7 +92,7 @@
                         <label for="inputPassword" class="col-sm-4 col-form-label">Jamaah Aktif</label>
                         <div class="col-sm-8">
                             <select class="custom-select @error('aktif') is-invalid @enderror" name="aktif" >
-                                <option selected value="{{$jamaah->aktif}}">
+                                <option value="{{$jamaah->aktif}}">
                                     <?php $aktif = $jamaah->aktif ; ?>
                                     @if($aktif == 1 )
                                         Aktif
@@ -103,7 +103,7 @@
                                 <option value="1">Aktif</option>
                                 <option value="0">Pasif</option>
                             </select>
-                            @error('aktif')
+                            @error('gender')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
