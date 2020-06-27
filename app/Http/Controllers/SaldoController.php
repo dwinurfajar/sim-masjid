@@ -10,9 +10,13 @@ use Illuminate\Support\Facades\DB;
 class SaldoController extends Controller
 {
     public function index(){
-    	$masuk = DB::table('masuks')->sum('jumlah');
+    	$msk = DB::table('masuks')->sum('jumlah');
+    	$masuk = DB::table('masuks')->get();
     	$keluar = DB::table('keluars')->sum('jumlah');
-    	$saldo = $masuk-$keluar;
-    	return view('backend/keuangan/saldo/saldo', ['saldo' => $saldo]);
+    	$saldo = $msk-$keluar;
+
+
+        //dump($masuk);
+        return view('backend/keuangan/saldo/saldo', [ 'saldo' => $saldo ], ['masuk' => $masuk ]);
     }
 }

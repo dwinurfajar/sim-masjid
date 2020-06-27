@@ -2,12 +2,13 @@
 @section('title', 'Profil')
 @section('state', '/ Users / Detail')
 @section('content')
-  <div class="row">
-    <div class="col-sm-3 text-center">
+<div class="fluid-container">
+  <div class="row ">
+    <div class="col-sm-4 text-center ">
       <img style="width: 240px; height: 240px; border-radius: 50%" src="/uploads/avatars/{{ $user->avatar }}" >
       
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-8 ">
       <table class="table">
 		  <thead>
 		    <tr>
@@ -17,19 +18,19 @@
 		  <tbody>
 		    <tr class="d-flex">
 		      <td class="col-3">Nama</td>
-		      <td class="col-8">
+		      <td class="col-9">
 		      	{{$user->name}}	
 		      </td>
 		    </tr>
 		    <tr class="d-flex">
 		      <td class="col-3">Email</td>
-		      <td class="col-8">
+		      <td class="col-9">
 		      	{{$user->email}}	
 		      </td>
 		    </tr>
 		    <tr class="d-flex">
 		      <td class="col-3">Role</td>
-		      <td class="col-8"><?php 
+		      <td class="col-9"><?php 
 	                                $isAdmin = Auth::user()->admin ; 
 	                            ?>
 	                            @if($isAdmin == 1 )
@@ -40,7 +41,7 @@
 	        </tr>
 		    <tr class="d-flex">
 		      <td class="col-3">Password</td>
-		      <td class="col-8">
+		      <td class="col-9">
 		      	Tidak ditampilkan	
 		      </td>
 		    </tr>
@@ -48,7 +49,7 @@
 		</table>
     </div>
   </div>
-
+</div>
 	
 
 	<script type="text/javascript">
