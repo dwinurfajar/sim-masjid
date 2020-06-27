@@ -114,7 +114,7 @@
                         <label for="inputPassword" class="col-sm-4 col-form-label">Penerima Zakat</label>
                         <div class="col-sm-8">
                             <select class="custom-select @error('zakat') is-invalid @enderror" name="zakat" >
-                                <option selected value="{{$jamaah->zakat}}">
+                                <option value="{{$jamaah->zakat}}">
                                     <?php $zakat = $jamaah->zakat ; ?>
                                     @if($zakat == 1 )
                                         Iya

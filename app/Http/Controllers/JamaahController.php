@@ -93,13 +93,13 @@ class JamaahController extends Controller
     {
         $request->validate([
             'nama' => 'required',
-            'jenisKelamin' => 'required',
+            'jenisKelamin' => 'required|boolean',
             'telephone' => 'required',
             'alamat' => 'required',
             'latt' => 'required',
             'long' => 'required',
-            'aktif' => 'required',
-            'zakat' => 'required',
+            'aktif' => 'required|boolean',
+            'zakat' => 'required|boolean',
         ]);
 
         Jamaah::where('id', $jamaah->id)->update([
