@@ -19,8 +19,8 @@ class CreateJamaahsTable extends Migration
             $table->boolean('jenisKelamin');
             $table->string('telephone');
             $table->string('alamat');
-            $table->boolean('aktif')->default('0');
-            $table->boolean('zakat')->default('0');
+            $table->boolean('aktif')->default(false);
+            $table->boolean('zakat')->default(false);
             $table->string('latt');
             $table->string('long');
             $table->timestamps();
