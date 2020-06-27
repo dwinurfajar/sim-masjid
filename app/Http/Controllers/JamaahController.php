@@ -98,8 +98,6 @@ class JamaahController extends Controller
             'alamat' => 'required',
             'latt' => 'required',
             'long' => 'required',
-            'aktif' => 'required',
-            'zakat' => 'required',
         ]);
 
         Jamaah::where('id', $jamaah->id)->update([
