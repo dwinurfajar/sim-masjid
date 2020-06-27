@@ -39,7 +39,7 @@
                                     <td>{{ $jmh->nama}}</td>
                                     <td class="text-center">
                                       <?php $jenisKelamin = $jmh->jenisKelamin; ?>
-                                      @if($jenisKelamin == yes )
+                                      @if($jenisKelamin == 1 )
                                           Laki-laki
                                       @else
                                           Perempuan
@@ -47,7 +47,7 @@
                                     </td>
                                     <td class="text-center">
                                       <?php $aktif = $jmh->aktif; ?>
-                                      @if($aktif == yes )
+                                      @if($aktif == 1 )
                                           Aktif
                                       @else
                                           Pasif
@@ -55,7 +55,7 @@
                                     </td>
                                     <td class="text-center">
                                       <?php $zakat = $jmh->zakat; ?>
-                                      @if($zakat == yes )
+                                      @if($zakat == 1 )
                                           Iya
                                       @else
                                           Tidak
@@ -160,7 +160,7 @@
                      
                       for (i = 0; i < locations.length; i++) { 
                        
-                        if(locations[i][3] == 'yes'){
+                        if(locations[i][3] == TRUE){
                          new mapboxgl.Marker({color: 'red'})
                           .setLngLat([locations[i][2], locations[i][1]])
                           .setPopup(new mapboxgl.Popup().setText(locations[i][0]))

@@ -26,8 +26,8 @@
                         <div class="col-sm-8">
                             <select class="custom-select @error('jenisKelamin') is-invalid @enderror" name="jenisKelamin">
                                 <option selected disabled value="">Pilih</option>
-                                <option value="yes">Laki-laki</option>
-                                <option value="no">Perempuan</option>
+                                <option value="1">Laki-laki</option>
+                                <option value="0">Perempuan</option>
                             </select>
                             @error('jenisKelamin')
                             	<span class="invalid-feedback" role="alert">

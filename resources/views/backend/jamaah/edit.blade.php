@@ -28,14 +28,14 @@
                             <select class="custom-select @error('jenisKelamin') is-invalid @enderror" name="jenisKelamin" >
                             	<option value="{{$jamaah->jenisKelamin}}">
                                     <?php $jenisKelamin = $jamaah->jenisKelamin ; ?>
-                                    @if($jenisKelamin == yes )
+                                    @if($jenisKelamin == 1 )
                                         Laki-laki
                                     @else
                                         Perempuan
                                     @endif
                                 </option>
-                                <option value="yes">Laki-laki</option>
-                                <option value="no">Perempuan</option>
+                                <option value="1">Laki-laki</option>
+                                <option value="0">Perempuan</option>
                             </select>
                             @error('jenisKelamin')
                             	<span class="invalid-feedback" role="alert">
@@ -94,14 +94,14 @@
                             <select class="custom-select @error('aktif') is-invalid @enderror" name="aktif" >
                                 <option value="{{$jamaah->aktif}}">
                                     <?php $aktif = $jamaah->aktif ; ?>
-                                    @if($aktif == yes )
+                                    @if($aktif == 1 )
                                         Aktif
                                     @else
                                         Pasif
                                     @endif
                                 </option>
-                                <option value="yes">Aktif</option>
-                                <option value="no">Pasif</option>
+                                <option value="1">Aktif</option>
+                                <option value="0">Pasif</option>
                             </select>
                             @error('aktif')
                                 <span class="invalid-feedback" role="alert">
@@ -116,14 +116,14 @@
                             <select class="custom-select @error('zakat') is-invalid @enderror" name="zakat" >
                                 <option value="{{$jamaah->zakat}}">
                                     <?php $zakat = $jamaah->zakat ; ?>
-                                    @if($zakat == yes )
+                                    @if($zakat == 1 )
                                         Iya
                                     @else
                                         Tidak
                                     @endif
                                 </option>
-                                <option value="yes">Iya</option>
-                                <option value="no">Tidak</option>
+                                <option value="1">Iya</option>
+                                <option value="0">Tidak</option>
                             </select>
                             @error('zakat')
                                 <span class="invalid-feedback" role="alert">
