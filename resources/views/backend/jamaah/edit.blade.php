@@ -103,7 +103,7 @@
                                 <option value="1">Aktif</option>
                                 <option value="0">Pasif</option>
                             </select>
-                            @error('gender')
+                            @error('aktif')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
