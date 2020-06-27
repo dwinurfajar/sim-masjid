@@ -1,4 +1,6 @@
 	@extends('backend/master')
+	@section('title', 'Detail')
+	@section('state', '/ Jamaah / Detail')
 	@section('content')
 	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
 	<script src="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.js"></script>

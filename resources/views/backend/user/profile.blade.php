@@ -1,4 +1,6 @@
 @extends('backend/master')
+@section('title', 'Profil')
+@section('state', '/ Users / Detail')
 @section('content')
   <div class="row">
     <div class="col-sm-3 text-center">

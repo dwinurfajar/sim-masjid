@@ -1,4 +1,6 @@
 @extends('backend/master')
+@section('title', 'Tambah')
+@section('state', '/ Users / Tambah')
 @section('content')
 <div>
 	<form class="col" method="post" action="{{ route('users.store') }}">
