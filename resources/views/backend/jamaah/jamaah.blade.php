@@ -160,7 +160,7 @@
                      
                       for (i = 0; i < locations.length; i++) { 
                        
-                        if(locations[i][3] == TRUE){
+                        if(locations[i][3] == true){
                          new mapboxgl.Marker({color: 'red'})
                           .setLngLat([locations[i][2], locations[i][1]])
                           .setPopup(new mapboxgl.Popup().setText(locations[i][0]))
