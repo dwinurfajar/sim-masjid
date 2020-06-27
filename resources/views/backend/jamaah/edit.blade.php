@@ -92,7 +92,7 @@
                         <label for="inputPassword" class="col-sm-4 col-form-label">Jamaah Aktif</label>
                         <div class="col-sm-8">
                             <select class="custom-select @error('aktif') is-invalid @enderror" name="aktif" >
-                                <option value="{{$jamaah->aktif}}">
+                                <option selected value="{{$jamaah->aktif}}">
                                     <?php $aktif = $jamaah->aktif ; ?>
                                     @if($aktif == 1 )
                                         Aktif
@@ -114,7 +114,7 @@
                         <label for="inputPassword" class="col-sm-4 col-form-label">Penerima Zakat</label>
                         <div class="col-sm-8">
                             <select class="custom-select @error('zakat') is-invalid @enderror" name="zakat" >
-                                <option value="{{$jamaah->zakat}}">
+                                <option selected value="{{$jamaah->zakat}}">
                                     <?php $zakat = $jamaah->zakat ; ?>
                                     @if($zakat == 1 )
                                         Iya
