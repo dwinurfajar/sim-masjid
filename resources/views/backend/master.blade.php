@@ -51,6 +51,20 @@
                             @endif
                             <a class="nav-link" href="{{route('jamaah.index')}}">
                             <div class="sb-nav-link-icon"><i class="fas fa-pray"></i></div>Jamaah</a>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Keuangan
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
+                            ></a>
+                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{{route('masuk.index')}}">Kas Masuk</a>
+                                    <a class="nav-link" href="{{route('keluar.index')}}">Kas Keluar</a>
+                                    <a class="nav-link" href="">Saldo</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link" href="{{route('infaq.index')}}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-hand-holding-usd"></i></div>Infaq</a>
 
                         </div>
                     </div>
