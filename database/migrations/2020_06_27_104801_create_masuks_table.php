@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKMasuksTable extends Migration
+class CreateMasuksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateKMasuksTable extends Migration
      */
     public function up()
     {
-        Schema::create('k_masuks', function (Blueprint $table) {
+        Schema::create('masuks', function (Blueprint $table) {
             $table->id();
             $table->integer('jumlah');
             $table->char('keterangan', 1);
@@ -30,6 +30,6 @@ class CreateKMasuksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('k_masuks');
+        Schema::dropIfExists('masuks');
     }
 }

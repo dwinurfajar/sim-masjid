@@ -13,7 +13,7 @@
 	</a>
 
     <div class="card mb-4">
-        <div class="card-header"><i class="fas fa-table mr-1"></i>Data Infaq Masjid</div>
+        <div class="card-header"><i class="fas fa-table mr-1"></i>Data Kas Masuk Masjid</div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -68,6 +68,20 @@
                   </div>
               </div>
           </div>
+          <div class="row">
+              <div class="col-xl-6">
+                                <div class="card mb-4">
+                                    <div class="card-header"><i class="fas fa-chart-area mr-1"></i>Area Chart Example</div>
+                                    <div class="card-body"><canvas id="lineChart" width="100%" height="40"></canvas></div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="card mb-4">
+                                    <div class="card-header"><i class="fas fa-chart-bar mr-1"></i>Bar Chart Example</div>
+                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+                                </div>
+                            </div>
+                        </div>
           <!-- Modal -->
                 <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
@@ -106,5 +120,41 @@
                  {
                      $("#deleteForm").submit();
                  }
+              </script>
+              <script type="text/javascript">
+                //line
+                var ctxL = document.getElementById("lineChart").getContext('2d');
+                var myLineChart = new Chart(ctxL, {
+                type: 'line',
+                data: {
+                labels: ["January", "February", "March", "April", "May", "June", "July"],
+                datasets: [{
+                label: "My First dataset",
+                data: [65, 59, 80, 81, 56, 55, 40],
+                backgroundColor: [
+                'rgba(105, 0, 132, .2)',
+                ],
+                borderColor: [
+                'rgba(200, 99, 132, .7)',
+                ],
+                borderWidth: 2
+                },
+                {
+                label: "My Second dataset",
+                data: [28, 48, 40, 19, 86, 27, 90],
+                backgroundColor: [
+                'rgba(0, 137, 132, .2)',
+                ],
+                borderColor: [
+                'rgba(0, 10, 130, .7)',
+                ],
+                borderWidth: 2
+                }
+                ]
+                },
+                options: {
+                responsive: true
+                }
+                });
               </script>
 @endsection

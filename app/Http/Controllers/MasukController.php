@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\KMasuk;
+use App\Masuk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class KMasukController extends Controller
+class MasukController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class KMasukController extends Controller
      */
     public function index()
     {
-        $masuk = DB::table('k_masuks')->orderBy('tanggal', 'desc')->get();
+        $masuk = DB::table('masuks')->orderBy('tanggal', 'desc')->get();
         return view('backend/keuangan/masuk/masuk', ['masuk' => $masuk]);
     }
 
@@ -44,7 +44,7 @@ class KMasukController extends Controller
             'tanggal' => 'required',
         ]);
 
-        $masuk = new KMasuk;
+        $masuk = new Masuk;
         $masuk->jumlah = $request->jumlah;
         $masuk->keterangan = $request->keterangan;
         $masuk->sumber = $request->sumber;
@@ -57,49 +57,63 @@ class KMasukController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\KMasuk  $kMasuk
+     * @param  \App\Masuk  $masuk
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show(Masuk $masuk)
     {
-        $masuk = DB::table('k_masuks')->where('id',$kMasuk->id)->first();
-        dump($request->id);
+        $masuk = DB::table('masuks')->where('id',$masuk->id)->first();
+        dump($masuk->id);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\KMasuk  $kMasuk
+     * @param  \App\Masuk  $masuk
      * @return \Illuminate\Http\Response
      */
-    public function edit(KMasuk $kMasuk)
+    public function edit(Masuk $masuk)
     {
-        $masuk = DB::table('k_masuks')->where('id',$kMasuk->id)->first();
-        dump($masuk);
-        //return view('backend/keuangan/masuk/edit', ['masuk' => $masuk]);
+        $masuk = DB::table('masuks')->where('id',$masuk->id)->first();
+        //dump($masuk);
+        return view('backend/keuangan/masuk/edit', ['masuk' => $masuk]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\KMasuk  $kMasuk
+     * @param  \App\Masuk  $masuk
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, KMasuk $kMasuk)
+    public function update(Request $request, Masuk $masuk)
     {
-        //
+        $request->validate([
+            'jumlah' => ['required'],
+            'keterangan' => ['required'],
+            'sumber' => ['required'],
+            'tanggal' => ['required'],
+
+        ]);
+
+        Masuk::where('id', $masuk->id)->update([
+            'jumlah' => $request->jumlah,
+            'keterangan' => $request->keterangan,
+            'sumber' => $request->sumber,
+            'tanggal' => $request->tanggal,
+        ]);
+        return back()->with('status', 'Berhasil diubah');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\KMasuk  $kMasuk
+     * @param  \App\Masuk  $masuk
      * @return \Illuminate\Http\Response
      */
-    public function destroy(KMasuk $kMasuk)
+    public function destroy(Masuk $masuk)
     {
-        KMasuk::destroy($kMasuk->id);
+        Masuk::destroy($masuk->id);
         return back()->with('status', 'Berhasil dihapus');
     }
 }

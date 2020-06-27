@@ -8,8 +8,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
 
 <div class="row">
-	<form class="col" method="post" action="{{route('masuk.store')}}">
+	<form class="col" method="post" action="{{route('masuk.update', $masuk->id)}}">
 	@csrf
+	@method('PATCH')
 	<div class="container">
 	<div class="form-group">
 		<label>Jumlah (Rp)</label>
@@ -23,7 +24,16 @@
 	<div class="form-group">
 		<label >Keterangan</label>
 		<select class="custom-select @error('keterangan') is-invalid @enderror" name="keterangan">
-            <option selected disabled value="{{$masuk->keterangan}}">{{$masuk->keterangan}}</option>
+            <option selected value="{{$masuk->keterangan}}">
+            	<?php $keterangan = $masuk->keterangan; ?>
+                                                  @if($keterangan == 'I' )
+                                                      Infaq
+                                                  @elseif($keterangan == 'S' )
+                                                      Sedekah
+                                                  @else
+                                                      ain-lain
+                                                  @endif 
+            </option>
             <option value="I">Infaq</option>
             <option value="S">Sedekah</option>
             <option value="L">Lain-lain</option>

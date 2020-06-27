@@ -33,6 +33,7 @@ Route::group(['prefix'=>'dashboard', 'middleware'=>['auth']], function(){
 
 	Route::resource('jamaah', 'JamaahController');
 	Route::resource('infaq', 'InfaqController');
-	Route::resource('masuk', 'KMasukController');
+	Route::resource('masuk', 'MasukController');
 	Route::resource('keluar', 'KeluarController');
+	Route::resource('saldo', 'SaldoController');
 });
