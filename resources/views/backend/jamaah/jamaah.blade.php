@@ -123,8 +123,16 @@
                 <label for="exampleFormControlInput1">Peta Persebaran Jamaah Masjid KH Ahmad Dahlan</label>
 
                	<div class="col" id="map" style="height: 300px; width: 100%;"></div>
-
-
+                  <style>
+                    .masjid {
+                      background-image: url('{{asset('backend/marker/masjid.png')}}');
+                      background-size: cover;
+                      width: 40px;
+                      height: 40px;
+                      border-radius: 50%;
+                      cursor: pointer;
+                    }
+                  </style>
                   <script>
                     mapboxgl.accessToken = 'pk.eyJ1IjoiZHluYXRpYyIsImEiOiJja2JpcnpyaHQwaTcwMnNsdHZweTc2eXQ0In0.2dDt6graznsFCKEN64n1ZQ';
                      var obj = JSON.parse('<?php echo json_encode($jamaah) ?>')
@@ -133,19 +141,36 @@
                       var i;
 
                       for(i=0; i<obj.length; i++){                     
-                          locations[i] = [[obj[i].nama], [obj[i].latt], [obj[i].long], [obj[i].nomorHp]];
+                          locations[i] = [[obj[i].nama], [obj[i].latt], [obj[i].long], [obj[i].aktif]];
                       }
 
                       var map = new mapboxgl.Map({
                           container: 'map',
                           style: 'mapbox://styles/mapbox/streets-v11',
-                          center: [112.60905970968918,-7.898348386333325],
+                          center: [ 112.608752, -7.898696],
                           zoom: 14
+
                       });
+                      var mjd = document.createElement('div');
+                      mjd.className = 'masjid';
+                      var marker = new mapboxgl.Marker(mjd)
+                        .setLngLat([ 112.608752, -7.898696])
+                        .setPopup(new mapboxgl.Popup().setText('Masjid KH Ahmad Dahlan'))
+                        .addTo(map);
                      
                       for (i = 0; i < locations.length; i++) { 
-                        
-                         new mapboxgl.Marker().setLngLat([locations[i][2], locations[i][1]]).addTo(map);
+                       
+                        if(locations[i][3] == 1){
+                         new mapboxgl.Marker({color: 'red'})
+                          .setLngLat([locations[i][2], locations[i][1]])
+                          .setPopup(new mapboxgl.Popup().setText(locations[i][0]))
+                          .addTo(map);
+                        }else{
+                          new mapboxgl.Marker({color: 'yellow'})
+                          .setLngLat([locations[i][2], locations[i][1]])
+                          .setPopup(new mapboxgl.Popup().setText(locations[i][0]))
+                          .addTo(map);
+                        }
 
                       };
                   </script>   
