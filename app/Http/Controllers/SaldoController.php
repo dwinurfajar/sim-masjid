@@ -24,4 +24,20 @@ class SaldoController extends Controller
         //dump($masuk);
         return view('backend/keuangan/saldo/saldo', compact('saldo', 'masuk', 'msk','keluar', 'klr'));
     }
+
+    public function ajaxIndex(){
+        return view('backend/keuangan/masuk/ajax');
+    }
+    public function ajaxRespon(Request $request){
+
+        //$data = DB::table('masuks')->where('id', $request->message)->first();
+        //
+        $data = DB::table('masuks')->select('jumlah', 'tanggal')->whereMonth('tanggal', $request->id)->orderBy('tanggal', 'asc')->get();
+
+         $response = array(
+          'status' => 'success',
+          'msg' => $data,
+      );
+      return response()->json($response);
+    }
 }

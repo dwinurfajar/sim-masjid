@@ -2,10 +2,28 @@
 @section('title', 'Kas Masuk')
 @section('state', '/ Kas Masuk')
 @section('content')
+
+    <!-- load jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- provide the csrf token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
-  	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
 
+<div class="row mb-4">
+  <div class="col ">
+    <button class="btn postbutton">Post via ajax!</button>
+  </div>
+  <div class="btn-group mr-2" role="group" aria-label="First group">
+    <button type="button" class="btn btn-secondary postbutton">1</button>
+    <button type="button" class="btn btn-secondary">2</button>
+    <button type="button" class="btn btn-secondary">3</button>
+    <button type="button" class="btn btn-secondary">Semua</button>
+  </div>
+</div>
   <div class="row">
               <div class="col-xl-6">
                                 <div class="card mb-4">
@@ -125,12 +143,76 @@
                  }
               </script>
 <script type="text/javascript">
-  //line
+    
+  var obj;
+  $(document).ready(function(){
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $(".postbutton").click(function(){
+                $.ajax({
+                    /* the route pointing to the post function */
+                    url: '/dashboard/postajax',
+                    type: 'POST',
+                    /* send the csrf-token and the input to the controller */
+                    data: {_token: CSRF_TOKEN, id:4},
+                    dataType: 'JSON',
+                    /* remind that 'data' is the response of the AjaxController */
+                    success: function (data) { 
+                        //$(".writeinfo").append(data.msg);
+                         //console.log(data.msg);
+                        //alert(data.msg);
+                        obj = JSON.stringify(data.msg);
+                        console.log(obj);
+                        var arr = JSON.parse(data.msg);
+                        console.log(arr);
+                        drawChart(obj);
+
+
+                    }
+                }); 
+            });
+       }); 
+function drawChart(obj){
   var obj = JSON.parse('<?php echo json_encode($msuk) ?>')
     var label = [];
     var data1 = [];
     var i, j =0;
-    console.log(obj);
+    //console.log(obj);
+
+    for(i=obj.length-1; i>=0; i--){                     
+        label[j] =  [obj[i].tanggal];
+        data1[j] = [obj[i].jumlah];
+        j++;
+    }
+
+  var ctxL = document.getElementById("masukChart").getContext('2d');
+  var myLineChart = new Chart(ctxL, {
+  type: 'line',
+    data: {
+      labels: label,
+        datasets: [{
+          label: "Kas Masuk",
+          data: data1,
+          backgroundColor: [
+          'rgba(105, 0, 132, .2)',
+          ],
+          borderColor: [
+          'rgba(200, 99, 132, .7)',
+          ],
+          borderWidth: 2
+        }
+        ]
+      },
+      options: {
+      responsive: true
+    }
+  });
+}
+  //line
+ var obj = JSON.parse('<?php echo json_encode($msuk) ?>')
+    var label = [];
+    var data1 = [];
+    var i, j =0;
+    //console.log(obj);
 
     for(i=obj.length-1; i>=0; i--){                     
         label[j] =  [obj[i].tanggal];
@@ -184,7 +266,7 @@ for(i=0; i<obj.length; i++){
 var ctxP = document.getElementById("ketChart").getContext('2d');
                     var myPieChart = new Chart(ctxP, {
                       plugins: [ChartDataLabels],
-                    type: 'pie',
+                    type: 'doughnut',
                     data: {
                     labels: ["Infaq", "Sedekah", "Lain-lain"],
                     datasets: [{
