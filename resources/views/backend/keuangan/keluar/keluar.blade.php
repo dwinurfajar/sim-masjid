@@ -7,6 +7,21 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
 
 
+  <div class="row">
+              <div class="col-xl-6">
+                                <div class="card mb-4">
+                                    <div class="card-header"><i class="fas fa-chart-area mr-1"></i>Area Chart Example</div>
+                                    <div class="card-body"><canvas id="keluarChart" width="100%" height="40"></canvas></div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="card mb-4">
+                                    <div class="card-header"><i class="fas fa-chart-bar mr-1"></i>Bar Chart Example</div>
+                                    <div class="card-body"><canvas id="ketChart" width="100%" height="40"></canvas></div>
+                                </div>
+                            </div>
+                        </div>
+
 	<!-- Button trigger modal -->
 	<a href="{{route('keluar.create')}}" class="btn btn-primary mb-4">
 	  <i class="fas fa-plus-square mr-2"></i>Tambah Data
@@ -95,4 +110,43 @@
                      $("#deleteForm").submit();
                  }
               </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
+
+<script type="text/javascript">
+  //line
+  var obj = JSON.parse('<?php echo json_encode($keluar) ?>')
+    var label = [];
+    var data1 = [];
+    var i;
+
+    for(i=0; i<obj.length; i++){                     
+        label[i] =  [obj[i].tanggal];
+        data1[i] = [obj[i].jumlah];
+    }
+
+  var ctxL = document.getElementById("keluarChart").getContext('2d');
+  var myLineChart = new Chart(ctxL, {
+  type: 'line',
+    data: {
+      labels: label,
+        datasets: [{
+          label: "Kas Keluar",
+          data: data1,
+          backgroundColor: [
+          'rgba(105, 0, 132, .2)',
+          ],
+          borderColor: [
+          'rgba(200, 99, 132, .7)',
+          ],
+          borderWidth: 2
+        }
+        ]
+      },
+      options: {
+      responsive: true
+    }
+  });
+</script>
 @endsection
