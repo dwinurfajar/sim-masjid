@@ -1,4 +1,6 @@
 @extends('backend/master')
+@section('title', 'Saldo')
+@section('state', '/ Saldo')
 @section('content')
 
 <div class="row">
@@ -42,84 +44,21 @@
                         <div class="row">
                             <div class="col-xl-6">
                                 <div class="card mb-4">
-                                    <div class="card-header"><i class="fas fa-chart-area mr-1"></i>Area Chart Example</div>
-                                    <div class="card-body"><canvas id="s" width="100%" height="40"></canvas></div>
+                                    <div class="card-header"><i class="fas fa-chart-area mr-1"></i>Kas Masuk Bulan Ini</div>
+                                    <div class="card-body"><canvas id="mskChart" width="100%" height="40"></canvas></div>
                                 </div>
                             </div>
                             <div class="col-xl-6">
                                 <div class="card mb-4">
-                                    <div class="card-header"><i class="fas fa-chart-bar mr-1"></i>Bar Chart Example</div>
-                                    <div class="card-body"><canvas id="lineChart" width="100%" height="40"></canvas></div>
+                                    <div class="card-header"><i class="fas fa-chart-bar mr-1"></i>Kas Keluar Bulan Ini</div>
+                                    <div class="card-body"><canvas id="klrChart" width="100%" height="40"></canvas></div>
                                 </div>
                             </div>
                         </div>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>  
-
-
-<script type="text/javascript">
-    Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
-    Chart.defaults.global.defaultFontColor = '#292b2c';
-    var obj = JSON.parse('<?php echo json_encode($masuk) ?>')
-    var label = [];
-    var data = [];
-    var largest;
-    var i;
-
-    for (i=0; i<=largest;i++){
-        if (data[i]>largest) {
-            var largest=data[i];
-        }
-    }
-
-    for(i=0; i<obj.length; i++){                     
-        label[i] =  [obj[i].tanggal];
-        data[i] = [obj[i].jumlah];
-    }
-
-    var ctx = document.getElementById("s");
-    var myLineChart = new Chart(ctx, {
-                          type: 'bar',
-                          data: {
-                            labels: ["april","mei","juni"],
-                            datasets: [{
-                              label: "Kas Masuk",
-                              backgroundColor: "rgba(2,117,216,1)",
-                              borderColor: "rgba(2,117,216,1)",
-                              data: data,
-                            }],
-                          },
-                          options: {
-                            scales: {
-                              xAxes: [{
-                                time: {
-                                  unit: 'day'
-                                },
-                                gridLines: {
-                                  display: false
-                                },
-                                ticks: {
-                                  maxTicksLimit: 6
-                                }
-                              }],
-                              yAxes: [{
-                                ticks: {
-                                  min: 0,
-                                  max: largest,//set max value
-                                  maxTicksLimit: 5
-                                },
-                                gridLines: {
-                                  display: true
-                                }
-                              }],
-                            },
-                            legend: {
-                              display: false
-                            }
-                          }
-     });
-</script> 
+ 
 <script type="text/javascript">
   //line
   var obj = JSON.parse('<?php echo json_encode($masuk) ?>')
@@ -132,7 +71,7 @@
         data1[i] = [obj[i].jumlah];
     }
 
-  var ctxL = document.getElementById("lineChart").getContext('2d');
+  var ctxL = document.getElementById("mskChart").getContext('2d');
   var myLineChart = new Chart(ctxL, {
   type: 'line',
     data: {
@@ -145,6 +84,39 @@
           ],
           borderColor: [
           'rgba(200, 99, 132, .7)',
+          ],
+          borderWidth: 2
+        }
+        ]
+      },
+      options: {
+      responsive: true
+    }
+  });
+
+  var obj = JSON.parse('<?php echo json_encode($keluar) ?>')
+    var label = [];
+    var data1 = [];
+    var i;
+
+    for(i=0; i<obj.length; i++){                     
+        label[i] =  [obj[i].tanggal];
+        data1[i] = [obj[i].jumlah];
+    }
+
+  var ctxL = document.getElementById("klrChart").getContext('2d');
+  var myLineChart = new Chart(ctxL, {
+  type: 'line',
+    data: {
+      labels: label,
+        datasets: [{
+          label: "Kas Keluar",
+          data: data1,
+          backgroundColor: [
+          'rgba(0, 137, 132, .2)',
+          ],
+          borderColor: [
+          'rgba(0, 10, 130, .7)',
           ],
           borderWidth: 2
         }

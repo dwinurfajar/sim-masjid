@@ -15,8 +15,10 @@ class KeluarController extends Controller
      */
     public function index()
     {
+        $month = date('m');
+        $kluar = DB::table('keluars')->whereMonth('tanggal', $month)->orderBy('tanggal', 'desc')->get();
         $keluar = DB::table('keluars')->orderBy('tanggal', 'desc')->get();
-        return view('backend/keuangan/keluar/keluar', ['keluar' => $keluar]);
+        return view('backend/keuangan/keluar/keluar', compact('keluar','kluar'));
     }
 
     /**

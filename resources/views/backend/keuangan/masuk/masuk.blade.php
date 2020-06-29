@@ -9,13 +9,13 @@
   <div class="row">
               <div class="col-xl-6">
                                 <div class="card mb-4">
-                                    <div class="card-header"><i class="fas fa-chart-area mr-1"></i>Area Chart Example</div>
+                                    <div class="card-header"><i class="fas fa-chart-area mr-1"></i>Kas Masuk Bulan Ini</div>
                                     <div class="card-body"><canvas id="masukChart" width="100%" height="40"></canvas></div>
                                 </div>
                             </div>
                             <div class="col-xl-6">
                                 <div class="card mb-4">
-                                    <div class="card-header"><i class="fas fa-chart-bar mr-1"></i>Bar Chart Example</div>
+                                    <div class="card-header"><i class="fas fa-chart-pie mr-1"></i>Keterangan</div>
                                     <div class="card-body"><canvas id="ketChart" width="100%" height="40"></canvas></div>
                                 </div>
                             </div>
@@ -126,14 +126,16 @@
               </script>
 <script type="text/javascript">
   //line
-  var obj = JSON.parse('<?php echo json_encode($masuk) ?>')
+  var obj = JSON.parse('<?php echo json_encode($msuk) ?>')
     var label = [];
     var data1 = [];
-    var i;
+    var i, j =0;
+    console.log(obj);
 
-    for(i=0; i<6; i++){                     
-        label[i] =  [obj[i].tanggal];
-        data1[i] = [obj[i].jumlah];
+    for(i=obj.length-1; i>=0; i--){                     
+        label[j] =  [obj[i].tanggal];
+        data1[j] = [obj[i].jumlah];
+        j++;
     }
 
   var ctxL = document.getElementById("masukChart").getContext('2d');

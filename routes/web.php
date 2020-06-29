@@ -32,7 +32,7 @@ Route::group(['prefix'=>'dashboard', 'middleware'=>['auth']], function(){
 	Route::post('upload-avatar', 'UserController@uploadAvatar')->name('upload.avatar');
 
 	Route::resource('jamaah', 'JamaahController');
-	Route::resource('infaq', 'InfaqController');
+
 	Route::resource('masuk', 'MasukController');
 	Route::resource('keluar', 'KeluarController');
 	Route::resource('saldo', 'SaldoController');
