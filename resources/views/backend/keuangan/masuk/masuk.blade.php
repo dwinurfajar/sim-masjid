@@ -6,7 +6,20 @@
   	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
 
-
+  <div class="row">
+              <div class="col-xl-6">
+                                <div class="card mb-4">
+                                    <div class="card-header"><i class="fas fa-chart-area mr-1"></i>Area Chart Example</div>
+                                    <div class="card-body"><canvas id="masukChart" width="100%" height="40"></canvas></div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="card mb-4">
+                                    <div class="card-header"><i class="fas fa-chart-bar mr-1"></i>Bar Chart Example</div>
+                                    <div class="card-body"><canvas id="ketChart" width="100%" height="40"></canvas></div>
+                                </div>
+                            </div>
+                        </div>
 	<!-- Button trigger modal -->
 	<a href="{{route('masuk.create')}}" class="btn btn-primary mb-4">
 	  <i class="fas fa-plus-square mr-2"></i>Tambah Data
@@ -49,7 +62,7 @@
                                                   @elseif($keterangan == 'S' )
                                                       Sedekah
                                                   @else
-                                                      ain-lain
+                                                      Lain-lain
                                                   @endif       
                                 </td>
             						      	<td>{{ $msk->sumber}}</td>
@@ -68,20 +81,7 @@
                   </div>
               </div>
           </div>
-          <div class="row">
-              <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card-header"><i class="fas fa-chart-area mr-1"></i>Area Chart Example</div>
-                                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
-                                </div>
-                            </div>
-                            <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card-header"><i class="fas fa-chart-bar mr-1"></i>Bar Chart Example</div>
-                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
-                                </div>
-                            </div>
-                        </div>
+          
           <!-- Modal -->
                 <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
@@ -107,6 +107,9 @@
                   </div>
                 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
             <script type="text/javascript">
                  function deleteData(id)
                  {
@@ -121,40 +124,106 @@
                      $("#deleteForm").submit();
                  }
               </script>
-              <script type="text/javascript">
-                //line
-                var ctxL = document.getElementById("hjk").getContext('2d');
-                var myLineChart = new Chart(ctxL, {
-                type: 'line',
-                data: {
-                labels: ["January", "February", "March", "April", "May", "June", "July"],
-                datasets: [{
-                label: "My First dataset",
-                data: [65, 59, 80, 81, 56, 55, 40],
-                backgroundColor: [
-                'rgba(105, 0, 132, .2)',
-                ],
-                borderColor: [
-                'rgba(200, 99, 132, .7)',
-                ],
-                borderWidth: 2
-                },
-                {
-                label: "My Second dataset",
-                data: [28, 48, 40, 19, 86, 27, 90],
-                backgroundColor: [
-                'rgba(0, 137, 132, .2)',
-                ],
-                borderColor: [
-                'rgba(0, 10, 130, .7)',
-                ],
-                borderWidth: 2
-                }
-                ]
-                },
-                options: {
-                responsive: true
-                }
-                });
-              </script>
+<script type="text/javascript">
+  //line
+  var obj = JSON.parse('<?php echo json_encode($masuk) ?>')
+    var label = [];
+    var data1 = [];
+    var i;
+
+    for(i=0; i<6; i++){                     
+        label[i] =  [obj[i].tanggal];
+        data1[i] = [obj[i].jumlah];
+    }
+
+  var ctxL = document.getElementById("masukChart").getContext('2d');
+  var myLineChart = new Chart(ctxL, {
+  type: 'line',
+    data: {
+      labels: label,
+        datasets: [{
+          label: "Kas Masuk",
+          data: data1,
+          backgroundColor: [
+          'rgba(105, 0, 132, .2)',
+          ],
+          borderColor: [
+          'rgba(200, 99, 132, .7)',
+          ],
+          borderWidth: 2
+        }
+        ]
+      },
+      options: {
+      responsive: true
+    }
+  });
+
+
+var inf = 0;
+var sdk = 0;
+var dll = 0;
+var i;
+
+var d = new Date();
+var n = d.getMonth();
+
+for(i=0; i<obj.length; i++){  
+  if([obj[i].keterangan] == 'I'){
+                          inf++;
+                        }else if([obj[i].keterangan] == 'S'){
+                          sdk++;
+                        }else{
+                          dll++;
+                        }
+                    }
+                    console.log(inf,sdk,dll, n);
+
+var ctxP = document.getElementById("ketChart").getContext('2d');
+                    var myPieChart = new Chart(ctxP, {
+                      plugins: [ChartDataLabels],
+                    type: 'pie',
+                    data: {
+                    labels: ["Infaq", "Sedekah", "Lain-lain"],
+                    datasets: [{
+                    data: [inf, sdk, dll],
+                    backgroundColor: ["#4D5360", "#46BFBD", "#F7464A"],
+                    hoverBackgroundColor: ["#616774", "#5AD3D1", "#FF5A5E"]
+                    }]
+                    },
+                    options: {
+                    responsive: true,
+                    legend: {
+                      position: 'bottom',
+                      labels: {
+                        padding: 20,
+                        boxWidth: 10
+                      }
+                    },
+                    plugins: {
+                      datalabels: {
+                        formatter: (value, ctx) => {
+                          let sum = 0;
+                          let dataArr = ctx.chart.data.datasets[0].data;
+                          dataArr.map(data => {
+                            sum += data;
+                          });
+                          let percentage = (value * 100 / sum).toFixed(1) + "%";
+                          return percentage;
+                        },
+                        color: 'white',
+                        labels: {
+                          title: {
+                            font: {
+                              size: '10'
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+
+});
+</script>
+
 @endsection

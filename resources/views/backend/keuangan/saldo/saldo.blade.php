@@ -22,7 +22,7 @@
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-success text-white mb-4">
-                                    <div class="card-body">Kas Keluar : Rp {{$keluar}}</div>
+                                    <div class="card-body">Kas Keluar : Rp {{$klr}}</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="#">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -82,7 +82,7 @@
     var myLineChart = new Chart(ctx, {
                           type: 'bar',
                           data: {
-                            labels: label,
+                            labels: ["april","mei","juni"],
                             datasets: [{
                               label: "Kas Masuk",
                               backgroundColor: "rgba(2,117,216,1)",
@@ -122,41 +122,29 @@
 </script> 
 <script type="text/javascript">
   //line
+  var obj = JSON.parse('<?php echo json_encode($masuk) ?>')
+    var label = [];
+    var data1 = [];
+    var i;
+
+    for(i=0; i<obj.length; i++){                     
+        label[i] =  [obj[i].tanggal];
+        data1[i] = [obj[i].jumlah];
+    }
+
   var ctxL = document.getElementById("lineChart").getContext('2d');
   var myLineChart = new Chart(ctxL, {
   type: 'line',
     data: {
-      labels: ["January", "February", "March", "April", "May", "June", "July"],
+      labels: label,
         datasets: [{
-          label: "My First dataset",
-          data: [65, 59, 80, 81, 56, 55, 40],
+          label: "Kas Masuk",
+          data: data1,
           backgroundColor: [
           'rgba(105, 0, 132, .2)',
           ],
           borderColor: [
           'rgba(200, 99, 132, .7)',
-          ],
-          borderWidth: 2
-        },
-        {
-          label: "My Second dataset",
-          data: [28, 48, 40, 19, 86, 27, 90],
-          backgroundColor: [
-            'rgba(0, 137, 132, .2)',
-          ],
-          borderColor: [
-            
-          ],
-          borderWidth: 2
-        },
-        {
-          label: "My Third dataset",
-          data: [20, 120, 43, 9, 38, 22, 78],
-          backgroundColor: [
-            'rgba(254, 232, 67, 0.77)',
-          ],
-          borderColor: [
-            
           ],
           borderWidth: 2
         }

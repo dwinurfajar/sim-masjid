@@ -6,7 +6,20 @@
 <script src="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.js"></script>
 <link href="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.css" rel="stylesheet" />
     <div>
-        <div class="col-xl-3 col-md-6"> </div>
+        <div class="row">
+                            <div class="col-xl-6">
+                                <div class="card mb-4">
+                                    <div class="card-header"><i class="fas fa-chart-pie mr-1"></i>Jumlah Laki-laki dan Perempuan</div>
+                                    <div class="card-body"><canvas id="genderChart" width="100%" height="40"></canvas></div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="card mb-4">
+                                    <div class="card-header"><i class="fas fa-chart-pie mr-1"></i>Jamaah Aktif dan Pasif</div>
+                                    <div class="card-body"><canvas id="aktifChart" width="100%" height="40"></canvas></div>
+                                </div>
+                            </div>
+                        </div>
    </div>
         <a type="button" href="{{route('jamaah.create')}}" class="btn btn-primary mb-4"><i class="fas fa-plus-square mr-2"></i>Tambah jamaah</a>
         <div class="card mb-4">
@@ -175,6 +188,128 @@
                         }
 
                       };
-                  </script>   
+                      
+                  </script> 
+                  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script> 
+                  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.min.js"></script>
+                  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
+                  <script type="text/javascript">
+                    var obj = JSON.parse('<?php echo json_encode($jamaah) ?>')
+                    var laki = 0;
+                    var per = 0;
+                    var aktif = 0;
+                    var pasif = 0;
+
+                    var i;
+
+                    for(i=0; i<obj.length; i++){  
+                        if([obj[i].jenisKelamin] == '1'){
+                          laki++;
+                        }else{
+                          per++;
+                        }
+                    }
+                    for(i=0; i<obj.length; i++){  
+                        if([obj[i].aktif] == '1'){
+                          aktif++;
+                        }else{
+                          pasif++;
+                        }
+                    }
+                    //pie
+                    var ctxP = document.getElementById("genderChart").getContext('2d');
+                    var myPieChart = new Chart(ctxP, {
+                      plugins: [ChartDataLabels],
+                    type: 'pie',
+                    data: {
+                    labels: ["Laki-laki", "Perempuan"],
+                    datasets: [{
+                    data: [laki, per],
+                    backgroundColor: ["#4D5360", "#46BFBD"],
+                    hoverBackgroundColor: ["#616774", "#5AD3D1"]
+                    }]
+                    },
+                    options: {
+                    responsive: true,
+                    legend: {
+                      position: 'bottom',
+                      labels: {
+                        padding: 20,
+                        boxWidth: 10
+                      }
+                    },
+                    plugins: {
+                      datalabels: {
+                        formatter: (value, ctx) => {
+                          let sum = 0;
+                          let dataArr = ctx.chart.data.datasets[0].data;
+                          dataArr.map(data => {
+                            sum += data;
+                          });
+                          let percentage = (value * 100 / sum).toFixed(1) + "%";
+                          return percentage;
+                        },
+                        color: 'white',
+                        labels: {
+                          title: {
+                            font: {
+                              size: '10'
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+
+});
+
+                    //pie
+                    var ctxP = document.getElementById("aktifChart").getContext('2d');
+                    var myPieChart = new Chart(ctxP, {
+                    plugins: [ChartDataLabels],
+                    type: 'pie',
+                    data: {
+                    labels: ["Aktif", "Pasif"],
+                    datasets: [{
+                    data: [aktif, pasif],
+                    backgroundColor: ["#F7464A", "#FDB45C"],
+                    hoverBackgroundColor: ["#FF5A5E", "#FFC870"]
+                    }]
+                    },
+                    options: {
+                    responsive: true,
+                    legend: {
+                      position: 'bottom',
+                      labels: {
+                        padding: 20,
+                        boxWidth: 10
+                      }
+                    },
+                    plugins: {
+                      datalabels: {
+                        formatter: (value, ctx) => {
+                          let sum = 0;
+                          let dataArr = ctx.chart.data.datasets[0].data;
+                          dataArr.map(data => {
+                            sum += data;
+                          });
+                          let percentage = (value * 100 / sum).toFixed(1) + "%";
+                          return percentage;
+                        },
+                        color: 'white',
+                        labels: {
+                          title: {
+                            font: {
+                              size: '10'
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+});
+
+
+                  </script>
             </div>
 @endsection

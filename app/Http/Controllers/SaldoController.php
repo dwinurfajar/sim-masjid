@@ -11,12 +11,14 @@ class SaldoController extends Controller
 {
     public function index(){
     	$msk = DB::table('masuks')->sum('jumlah');
+    	$klr = DB::table('keluars')->sum('jumlah');
+    	$saldo = $msk-$klr;
+
     	$masuk = DB::table('masuks')->select('jumlah', 'tanggal')->get();
-    	$keluar = DB::table('keluars')->sum('jumlah');
-    	$saldo = $msk-$keluar;
+    	$keluar = DB::table('keluars')->select('jumlah', 'tanggal')->get();
 
     	//$masuk = json_encode($masuk);
         //dump($masuk);
-        return view('backend/keuangan/saldo/saldo', compact('saldo', 'masuk', 'msk','keluar'));
+        return view('backend/keuangan/saldo/saldo', compact('saldo', 'masuk', 'msk','keluar', 'klr'));
     }
 }
