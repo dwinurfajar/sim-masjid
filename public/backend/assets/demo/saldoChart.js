@@ -1,7 +1,10 @@
 
-Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+    Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
     Chart.defaults.global.defaultFontColor = '#292b2c';
-    var obj = JSON.parse('<?php echo json_encode($masuk) ?>')
+
+
+
+
     var label = [];
     var data = [];
     var largest;
@@ -18,9 +21,9 @@ Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSyste
         data[i] = [obj[i].jumlah];
     }
 
-    var ctx = document.getElementById("chartMasuk");
+    var ctx = document.getElementById("chart");
     var myLineChart = new Chart(ctx, {
-                          type: 'bar',
+                          type: 'line',
                           data: {
                             labels: label,
                             datasets: [{
