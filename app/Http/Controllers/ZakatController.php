@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Zakat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use DataTables;
 
 class ZakatController extends Controller
 {
@@ -15,8 +16,7 @@ class ZakatController extends Controller
      */
     public function index()
     {
-        $zakat = DB::table('zakats')->get();
-        return view('backend/zakat/zakat', compact('zakat'));
+        return view('backend/zakat/ajax');
     }
 
     /**
@@ -37,7 +37,9 @@ class ZakatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+
+        return response()->json(['success'=>'Got Simple Ajax Request.']);
     }
 
     /**
@@ -59,7 +61,10 @@ class ZakatController extends Controller
      */
     public function edit(Zakat $zakat)
     {
-        //
+        $where = array('id' => $id);
+        $post  = Pegawai::where($where)->first();
+     
+        return response()->json($post);
     }
 
     /**
@@ -82,6 +87,8 @@ class ZakatController extends Controller
      */
     public function destroy(Zakat $zakat)
     {
-        //
+        $post = Pegawai::where('id',$id)->delete();
+     
+        return response()->json($post);
     }
 }
