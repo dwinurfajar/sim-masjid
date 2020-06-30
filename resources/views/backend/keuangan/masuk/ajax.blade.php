@@ -20,7 +20,7 @@
                     url: '/dashboard/postajax',
                     type: 'POST',
                     /* send the csrf-token and the input to the controller */
-                    data: {_token: CSRF_TOKEN, awal:$(".getinfo").val(), akhir:$(".getinfo1").val()},
+                    data: {_token: CSRF_TOKEN, tahun:$("input[name=tahun]").val(), bulan:$("input[name=bulan]").val()},
                     dataType: 'JSON',
                     /* remind that 'data' is the response of the AjaxController */
                     success: function (data) { 

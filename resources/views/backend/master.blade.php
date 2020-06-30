@@ -67,6 +67,8 @@
                                     <a class="nav-link" href="{{route('saldo.index')}}">Saldo</a>
                                 </nav>
                             </div>
+                            <a class="nav-link" href="{{route('zakat.index')}}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-hand-holding-usd"></i></div>Zakat</a>
                             
 
                         </div>

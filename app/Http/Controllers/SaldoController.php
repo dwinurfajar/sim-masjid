@@ -32,7 +32,11 @@ class SaldoController extends Controller
 
         //$data = DB::table('masuks')->where('id', $request->message)->first();
         //
-        $data = DB::table('masuks')->select('jumlah', 'tanggal')->whereMonth('tanggal', $request->id)->orderBy('tanggal', 'asc')->get();
+
+          
+        $data = DB::table('masuks')->select('jumlah', 'tanggal')->whereYear('tanggal', $request->tahun)->whereMonth('tanggal', $request->bulan)->orderBy('tanggal', 'asc')->get();
+
+        
 
          $response = array(
           'status' => 'success',

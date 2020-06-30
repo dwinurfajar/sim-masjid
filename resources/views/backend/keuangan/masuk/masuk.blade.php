@@ -13,16 +13,13 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
 
-<div class="row mb-4">
-  <div class="col ">
-    <button class="btn postbutton">Post via ajax!</button>
+<div class="input-group mb-4">
+  <div class="input-group">
+    <input class="form-control col" type="number" name="tahun" placeholder="Filter data berdasar tahun">
+    <input class="form-control col" type="number" name="bulan" placeholder="Filter data berdasar bulan">
+    <button class="btn-sm btn-success col-2 ajaxBTN">SET</button>
   </div>
-  <div class="btn-group mr-2" role="group" aria-label="First group">
-    <button type="button" class="btn btn-secondary postbutton">1</button>
-    <button type="button" class="btn btn-secondary">2</button>
-    <button type="button" class="btn btn-secondary">3</button>
-    <button type="button" class="btn btn-secondary">Semua</button>
-  </div>
+  
 </div>
   <div class="row">
               <div class="col-xl-6">
@@ -143,34 +140,33 @@
                  }
               </script>
 <script type="text/javascript">
+  
     
-  var obj;
+  var obj ;
   $(document).ready(function(){
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-            $(".postbutton").click(function(){
+            $(".ajaxBTN").click(function(){
                 $.ajax({
                     /* the route pointing to the post function */
                     url: '/dashboard/postajax',
                     type: 'POST',
                     /* send the csrf-token and the input to the controller */
-                    data: {_token: CSRF_TOKEN, id:4},
+                    data: {_token: CSRF_TOKEN, tahun:$("input[name=tahun]").val(), bulan:$("input[name=bulan]").val()},
                     dataType: 'JSON',
                     /* remind that 'data' is the response of the AjaxController */
                     success: function (data) { 
                         //$(".writeinfo").append(data.msg);
-                         //console.log(data.msg);
+                        console.log(data.msg);
+                        obj = data.msg;
                         //alert(data.msg);
-                        obj = JSON.stringify(data.msg);
-                        console.log(obj);
-                        var arr = JSON.parse(data.msg);
-                        console.log(arr);
-                        drawChart(obj);
+                        
 
 
                     }
                 }); 
             });
-       }); 
+       });
+
 function drawChart(obj){
   var obj = JSON.parse('<?php echo json_encode($msuk) ?>')
     var label = [];
@@ -261,8 +257,6 @@ for(i=0; i<obj.length; i++){
                           dll++;
                         }
                     }
-                    console.log(inf,sdk,dll, n);
-
 var ctxP = document.getElementById("ketChart").getContext('2d');
                     var myPieChart = new Chart(ctxP, {
                       plugins: [ChartDataLabels],

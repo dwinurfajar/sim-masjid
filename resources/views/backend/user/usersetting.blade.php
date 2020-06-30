@@ -3,7 +3,7 @@
 @section('state', '/ Users / Edit')
 @section('content')
   <div class="row">
-    <div class="col-sm-3 text-center">
+    <div class="col-sm-4 text-center">
       <img style="width: 240px; height: 240px; border-radius: 50%" src="/uploads/avatars/{{ $user->avatar }}" >
       <div class="">
       	<form enctype="multipart/form-data" method="post" action="{{route('upload.avatar')}}">
@@ -17,7 +17,7 @@
       </div>
       
     </div>
-    <div class="col-sm">
+    <div class="col-sm-8">
       <table class="table">
 		  <thead>
 		    <tr>

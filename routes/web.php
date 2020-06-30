@@ -37,6 +37,8 @@ Route::group(['prefix'=>'dashboard', 'middleware'=>['auth']], function(){
 	Route::resource('keluar', 'KeluarController');
 	Route::resource('saldo', 'SaldoController');
 
+	Route::resource('zakat', 'ZakatController');
+
 	Route::get('/ajaxRequest', 'SaldoController@ajaxIndex');
 	Route::post('/postajax', 'SaldoController@ajaxRespon');
 });
