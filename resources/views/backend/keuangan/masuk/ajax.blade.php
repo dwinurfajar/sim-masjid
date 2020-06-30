@@ -37,7 +37,7 @@
 <body>
     <input class="getinfo"></input>
      <input class="getinfo1"></input>
-    <button class="postbutton">Post via ajax!</button>
+    <button class="postbutton">Post ajax!</button>
     <div class="writeinfo"></div>   
 </body>
 @endsection
