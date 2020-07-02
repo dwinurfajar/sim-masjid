@@ -140,7 +140,7 @@
                  }
               </script>
 <script type="text/javascript">
-  
+
     
   var obj ;
   $(document).ready(function(){
@@ -159,7 +159,6 @@
                         console.log(data.msg);
                         obj = data.msg;
                         //alert(data.msg);
-                        
 
 
                     }
@@ -167,48 +166,12 @@
             });
        });
 
-function drawChart(obj){
-  var obj = JSON.parse('<?php echo json_encode($msuk) ?>')
-    var label = [];
-    var data1 = [];
-    var i, j =0;
-    //console.log(obj);
-
-    for(i=obj.length-1; i>=0; i--){                     
-        label[j] =  [obj[i].tanggal];
-        data1[j] = [obj[i].jumlah];
-        j++;
-    }
-
-  var ctxL = document.getElementById("masukChart").getContext('2d');
-  var myLineChart = new Chart(ctxL, {
-  type: 'line',
-    data: {
-      labels: label,
-        datasets: [{
-          label: "Kas Masuk",
-          data: data1,
-          backgroundColor: [
-          'rgba(105, 0, 132, .2)',
-          ],
-          borderColor: [
-          'rgba(200, 99, 132, .7)',
-          ],
-          borderWidth: 2
-        }
-        ]
-      },
-      options: {
-      responsive: true
-    }
-  });
-}
   //line
  var obj = JSON.parse('<?php echo json_encode($msuk) ?>')
     var label = [];
     var data1 = [];
     var i, j =0;
-    //console.log(obj);
+    console.log(obj);
 
     for(i=obj.length-1; i>=0; i--){                     
         label[j] =  [obj[i].tanggal];
@@ -245,8 +208,6 @@ var sdk = 0;
 var dll = 0;
 var i;
 
-var d = new Date();
-var n = d.getMonth();
 
 for(i=0; i<obj.length; i++){  
   if([obj[i].keterangan] == 'I'){
@@ -257,9 +218,11 @@ for(i=0; i<obj.length; i++){
                           dll++;
                         }
                     }
-var ctxP = document.getElementById("ketChart").getContext('2d');
+
+
+                    var ctxP = document.getElementById("ketChart").getContext('2d');
                     var myPieChart = new Chart(ctxP, {
-                      plugins: [ChartDataLabels],
+                    plugins: [ChartDataLabels],
                     type: 'doughnut',
                     data: {
                     labels: ["Infaq", "Sedekah", "Lain-lain"],
@@ -300,7 +263,6 @@ var ctxP = document.getElementById("ketChart").getContext('2d');
                       }
                     }
                   }
-
 });
 </script>
 

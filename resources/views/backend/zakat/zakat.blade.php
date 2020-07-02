@@ -2,29 +2,8 @@
 @section('title', 'Zakat')
 @section('state', '/ Zakat ')
 @section('content')
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
-  	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
-
-<div class="row">
-              <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card-header"><i class="fas fa-chart-area mr-1"></i>Kas Keluar Bulan Ini</div>
-                                    <div class="card-body"><canvas id="keluarChart" width="100%" height="40"></canvas></div>
-                                </div>
-                            </div>
-</div>
-
-	<!-- Button trigger modal -->
 
 
-  <!--
-	<a href="{{route('zakat.create')}}" class="btn btn-primary mb-4">
-	  <i class="fas fa-plus-square mr-2"></i>Tambah Data
-	</a>
--->
-
-    <title>CRUD AJAX LARAVEL</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- MULAI STYLE CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -34,48 +13,39 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.css"
         integrity="sha256-pODNVtK3uOhL8FUNWWvFQK0QoQoV3YA9wGGng6mbZ0E=" crossorigin="anonymous" />
+
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
     <!-- AKHIR STYLE CSS -->
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
 
 
 
-    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-        <h5 class="my-0 mr-md-auto font-weight-normal">LARAVEL AJAX CRUD YAJRA DATATABLE </h5>
-        <nav class="my-2 my-md-0 mr-md-3">
-            <a class="p-2 text-dark" href="#">Laravel</a>
-            <a class="p-2 text-dark" href="#">Codeigniter</a>
-            <a class="p-2 text-dark" href="#">Jquery</a>
-            <a class="p-2 text-dark" href="#">Vue Js</a>
-        </nav>
-        <a class="btn btn-outline-primary" target="_blank" href="https://www.youtube.com/channel/UCXFdc68srZQ-ok4I1-pHs2g?view_as=subscriber">Tahu Coding</a>
-    </div>
-
+<a href="javascript:void(0)" class="btn btn-primary mb-4" id="tombol-tambah"><i class="fas fa-plus-square mr-2"></i>Tambah Zakat</a>
     <!-- MULAI CONTAINER -->
-    <div class="container">
 
-        <div class="card">
-            
+<div class="card mb-4">
+        <div class="card-header"><i class="fas fa-table mr-1"></i>Data Zakat Masjid</div>
             <div class="card-body">
-                <!-- MULAI TOMBOL TAMBAH -->
-                <a href="javascript:void(0)" class="btn btn-info" id="tombol-tambah">Tambah PEGAWAI</a>
-                <br><br>
-                <!-- AKHIR TOMBOL -->
-                <!-- MULAI TABLE -->
-                <table class="table table-striped table-bordered table-sm" id="table_pegawai">
-                    <thead>
-                        <tr>
-                            <th>Nama</th>
-                            <th>JK</th>
-                            <th>Email</th>
-                            <th>Alamat</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                </table>
-                <!-- AKHIR TABLE -->
-            </div>
-        </div>
-    </div>
-    <!-- AKHIR CONTAINER -->
+                <div class="table-responsive">
+                    <table class="table table-bordered"  id="table_pegawai" width="100%" cellspacing="0">
+                        <thead>
+                            <tr class="text-center">
+                                <th>Nama</th>
+                                <th>Jenis Zakat</th>
+                                <th>Jenis Bayar</th>
+                                <th>Jumlah</th>
+                                <th>Tanggal</th>
+                                <th>Aksi</th>
+                              </tr>
+                        </thead>
+                      </table>
+                  </div>
+              </div>
+          </div>
+
+
 
     <!-- MULAI MODAL FORM TAMBAH/EDIT-->
     <div class="modal fade" id="tambah-edit-modal" aria-hidden="true">
@@ -92,44 +62,57 @@
 
                                 <input type="hidden" name="id" id="id">
 
-                                <div class="form-group">
-                                    <label for="name" class="col-sm-12 control-label">Nama Pegawai</label>
-                                    <div class="col-sm-12">
-                                        <input type="text" class="form-control" id="nama_pegawai" name="nama_pegawai"
+                                <div class="form-group row">
+                                    <label for="name" class="col-sm-4 control-label">Nama</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="nama" name="nama"
                                             value="" required>
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="name" class="col-sm-12 control-label">Jenis Kelamin</label>
-                                    <div class="col-sm-12">
-                                        <select name="jenis_kelamin" id="jenis_kelamin" class="form-control required">
-                                            <option value="">Pilih Jenis Kelamin</option>
-                                            <option value="Laki-laki">Laki-laki</option>
-                                            <option value="Perempuan">Perempuan</option>
+                                <div class="form-group row">
+                                    <label for="name" class="col-sm-4 control-label">Jenis Zakat</label>
+                                    <div class="col-sm-8">
+                                        <select name="jenisZakat" id="jenisZakat" class="form-control required">
+                                            <option value="">Pilih Jenis Zakat</option>
+                                            <option value="1">Fitrah</option>
+                                            <option value="0">Mal</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="name" class="col-sm-4 control-label">Jenis Bayar</label>
+                                    <div class="col-sm-8">
+                                        <select name="jenisBayar" id="jenisBayar" class="form-control required">
+                                            <option value="">Pilih Jenis Bayar</option>
+                                            <option value="1">Beras</option>
+                                            <option value="0">Tunai</option>
                                         </select>
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="name" class="col-sm-12 control-label">E-mail</label>
-                                    <div class="col-sm-12">
-                                        <input type="email" class="form-control" id="email" name="email" value=""
+                                <div class="form-group row">
+                                    <label  class="col-sm-4 col-form-label">Jumlah</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" class="form-control" id="jumlah" name="jumlah" value=""
                                             required>
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="name" class="col-sm-12 control-label">Alamat</label>
-                                    <div class="col-sm-12">
-                                        <textarea class="form-control" name="alamat" id="alamat" required></textarea>
-                                    </div>
+                                <div class="form-group row mb-2">
+                                    <label class="col-sm-4 col-form-label">Tanggal</label>
+                                    <div class="col-sm-8">
+                                         <input class="date form-control" type="text" id="tanggal" name="tanggal" placeholder="Tanggal">
+                                     </div>
                                 </div>
 
-                            </div>
+                                          <script type="text/javascript">
+                                            $('.date').datepicker({ format: 'yyyy-mm-dd'});  
+                                          </script>
 
-                            <div class="col-sm-offset-2 col-sm-12">
-                                <button type="submit" class="btn btn-primary btn-block" id="tombol-simpan"
+                            </div>
+                          <div class="text-center col">
+                                <button type="submit" class="btn btn-primary col-sm-4" id="tombol-simpan"
                                     value="create">Simpan
                                 </button>
                             </div>
@@ -170,7 +153,33 @@
 
     <!-- AKHIR MODAL -->
 
+    <!-- LIBARARY JS -->
+ 
+    
+<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+
+    <script type="text/javascript" language="javascript"
+        src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript" language="javascript"
+        src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"
+        integrity="sha256-sPB0F50YUDK0otDnsfNHawYmA5M0pjjUf4TvRJkGFrI=" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.js"
+        integrity="sha256-siqh9650JHbYFKyZeTEAhq+3jvkFCG8Iz+MHdr9eKrw=" crossorigin="anonymous"></script>
+
+
+    <!-- AKHIR LIBARARY JS -->
 
     <!-- JAVASCRIPT -->
     <script>
@@ -186,20 +195,21 @@
 
         //TOMBOL TAMBAH DATA
         //jika tombol-tambah diklik maka
+        jQuery(document).ready(function(){
         $('#tombol-tambah').click(function () {
             $('#button-simpan').val("create-post"); //valuenya menjadi create-post
             $('#id').val(''); //valuenya menjadi kosong
             $('#form-tambah-edit').trigger("reset"); //mereset semua input dll didalamnya
-            $('#modal-judul').html("Tambah Pegawai Baru"); //valuenya tambah pegawai baru
+            $('#modal-judul').html("Tambah Zakat"); //valuenya tambah pegawai baru
             $('#tambah-edit-modal').modal('show'); //modal tampil
         });
-
+});
         //MULAI DATATABLE
         //script untuk memanggil data json dari server dan menampilkannya berupa datatable
         $(document).ready(function () {
             $('#table_pegawai').DataTable({
                 dom: 'Bfrtip',
-            buttons: ['copy', 'excel', 'pdf', 'print'],
+                buttons: ['copy', 'excel', 'pdf', 'print'],
                 processing: true,
                 serverSide: true, //aktifkan server-side 
                 ajax: {
@@ -207,20 +217,41 @@
                     type: 'GET'
                 },
                 columns: [{
-                        data: 'nama_pegawai',
-                        name: 'nama_pegawai'
+                        data: 'nama',
+                        name: 'nama'
                     },
                     {
-                        data: 'jenis_kelamin',
-                        name: 'jenis_kelamin'
+                        data: 'jenisZakat',
+                        render : function(data){
+                          if(data === "1"){
+                            return 'Fitrah';
+                          }else{
+                            return 'Mal';
+                          }
+                        }
                     },
                     {
-                        data: 'email',
-                        name: 'Email'
+                        data: 'jenisBayar',
+                        render : function(data){
+                          if(data === "1"){
+                            return 'Beras';
+                          }else{
+                            return 'Tunai';
+                          }
+                        }
                     },
                     {
-                        data: 'alamat',
-                        name: 'alamat'
+                        data: 'jumlah',
+                        name: 'jumlah'
+                    },
+                    {
+                        data: 'tanggal',
+                        name: 'tanggal',
+                        type: 'datetime',
+                        def: function () { return new Date(); },
+                        displayFormat: 'M/D/YYYY',
+                        wireFormat: 'YYYY-MM-DD',
+                        fieldInfo: 'US style m/d/y format',
                     },
                     {
                         data: 'action',
@@ -228,8 +259,22 @@
                     },
 
                 ],
+                columnDefs: [
+                    {
+                        "targets": 5, // your case first column
+                        "className": "text-center"
+                   },
+                   {
+                        "targets": 1,
+                        "className": "text-center",
+                    },
+                   {
+                        "targets": 2,
+                        "className": "text-center",
+                    }
+                ],
                 order: [
-                    [0, 'asc']
+                    [4, 'desc']
                 ]
             });
         });
@@ -275,17 +320,18 @@
         //ketika class edit-post yang ada pada tag body di klik maka
         $('body').on('click', '.edit-post', function () {
             var data_id = $(this).data('id');
-            $.get('pegawai/' + data_id + '/edit', function (data) {
+            $.get('zakat/' + data_id + '/edit', function (data) {
                 $('#modal-judul').html("Edit Post");
                 $('#tombol-simpan').val("edit-post");
                 $('#tambah-edit-modal').modal('show');
 
                 //set value masing-masing id berdasarkan data yg diperoleh dari ajax get request diatas               
                 $('#id').val(data.id);
-                $('#nama_pegawai').val(data.nama_pegawai);
-                $('#jenis_kelamin').val(data.jenis_kelamin);
-                $('#email').val(data.email);
-                $('#alamat').val(data.alamat);
+                $('#nama').val(data.nama);
+                $('#jenisZakat').val(data.jenisZakat);
+                $('#jenisBayar').val(data.jenisBayar);
+                $('#jumlah').val(data.jumlah);
+                $('#tanggal').val(data.tanggal);
             })
         });
 
@@ -299,7 +345,7 @@
         $('#tombol-hapus').click(function () {
             $.ajax({
 
-                url: "pegawai/" + dataId, //eksekusi ajax ke url ini
+                url: "zakat/" + dataId, //eksekusi ajax ke url ini
                 type: 'delete',
                 beforeSend: function () {
                     $('#tombol-hapus').text('Hapus Data'); //set text untuk tombol hapus
@@ -324,121 +370,6 @@
 
     <!-- JAVASCRIPT -->
 
-    <!-- LIBARARY JS -->
-    <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-    </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-    </script>
-
-    <script type="text/javascript" language="javascript"
-        src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-
-    <script type="text/javascript" language="javascript"
-        src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"
-        integrity="sha256-sPB0F50YUDK0otDnsfNHawYmA5M0pjjUf4TvRJkGFrI=" crossorigin="anonymous"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.js"
-        integrity="sha256-siqh9650JHbYFKyZeTEAhq+3jvkFCG8Iz+MHdr9eKrw=" crossorigin="anonymous"></script>
-
-
-    <!-- AKHIR LIBARARY JS -->
-
-<!-- PEMBATAS-->
-<!--
-
-    <div class="card mb-4">
-        <div class="card-header"><i class="fas fa-table mr-1"></i>Data Kas Keluar Masjid</div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr class="text-center">
-                                <th>No</th>
-                                <th>Nama</th>
-                                <th>Jenis Zakat</th>
-                                <th>Jumlah</th>
-                                <th>Tanggal</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr class="text-center">
-                                <th>No</th>
-                                <th>Nama</th>
-                                <th>Jenis Zakat</th>
-                                <th>Jumlah</th>
-                                <th>Tanggal</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </tfoot>
-                         <tbody>
-            					  	@foreach ($zakat as $zkt)
-            						    <tr>
-            						      	<th class="text-center" scope="row">{{ $loop->iteration}}</th>
-            						      	<td>{{ $zkt->nama}}</td>
-            						      	<td>{{$zkt->jenisZakat}}</td>
-            						      	<td>{{ $zkt->jumlah}}</td>
-            						      	<td class="text-center">{{ date('d-M-Y', strtotime($zkt->tanggal)) }}</td>
-            								    <td class="text-center">
-            								 	    <a type="button" href="{{route('zakat.show', $klr->id)}}"  class="badge badge-primary"><i class="fas fa-info-circle mr-1"></i>Detail</a>
-
-                                  <a type="button" href="{{route('zakat.edit', $klr->id)}}" class="badge badge-success"><i class="fas fa-edit mr-1"></i>Edit</a>
-
-                                  <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$klr->id}})"data-target="#DeleteModal" class="badge badge-danger"><i class="fa fa-trash mr-1"></i>Hapus</a>
-            								</td>
-            							</tr>
-            						@endforeach
-            					  </tbody>
-                      </table>
-                  </div>
-              </div>
-          </div>
-
-                <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <form action="" id="deleteForm" method="post">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Hapus</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <p>Apakah anda yakin ingin menghapus data?</p>
-                        {{ csrf_field() }}
-                        {{ method_field('DELETE') }}
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-dismiss="modal">Batal</button>
-                        <button type="submit" onclick="formSubmit()" class="btn btn-danger" data-dismiss="modal">Ya, Lanjutkan</button>
-                      </div>
-                    </div>
-                    </form>
-                  </div>
-                </div>
-
-            <script type="text/javascript">
-                 function deleteData(id)
-                 {
-                     var id = id;
-                     var url = 'zakat/:id';
-                     url = url.replace(':id', id);
-                     $("#deleteForm").attr('action', url);
-                 }
-
-                 function formSubmit()
-                 {
-                     $("#deleteForm").submit();
-                 }
-              </script>
-
--->
+  
 @endsection

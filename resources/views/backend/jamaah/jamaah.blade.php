@@ -220,7 +220,7 @@
                     var ctxP = document.getElementById("genderChart").getContext('2d');
                     var myPieChart = new Chart(ctxP, {
                       plugins: [ChartDataLabels],
-                    type: 'pie',
+                    type: 'doughnut',
                     data: {
                     labels: ["Laki-laki", "Perempuan"],
                     datasets: [{
@@ -267,7 +267,7 @@
                     var ctxP = document.getElementById("aktifChart").getContext('2d');
                     var myPieChart = new Chart(ctxP, {
                     plugins: [ChartDataLabels],
-                    type: 'pie',
+                    type: 'doughnut',
                     data: {
                     labels: ["Aktif", "Pasif"],
                     datasets: [{

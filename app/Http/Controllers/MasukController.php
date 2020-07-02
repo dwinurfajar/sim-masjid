@@ -18,6 +18,7 @@ class MasukController extends Controller
         $month = date('m');
         $msuk = DB::table('masuks')->whereMonth('tanggal', $month)->orderBy('tanggal', 'desc')->get();
         $masuk = DB::table('masuks')->orderBy('tanggal', 'desc')->get();
+        //dump($month);
         return view('backend/keuangan/masuk/masuk', compact('masuk', 'msuk'));
     }
 

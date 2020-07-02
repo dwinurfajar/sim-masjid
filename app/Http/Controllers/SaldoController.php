@@ -21,7 +21,7 @@ class SaldoController extends Controller
     	$keluar = DB::table('keluars')->select('jumlah', 'tanggal')->whereMonth('tanggal', $month)->orderBy('tanggal', 'asc')->get();
 
     	//$masuk = json_encode($masuk);
-        //dump($masuk);
+        //dump($keluar);
         return view('backend/keuangan/saldo/saldo', compact('saldo', 'masuk', 'msk','keluar', 'klr'));
     }
 

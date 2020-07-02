@@ -44,7 +44,10 @@
                     </div>
                     <div class="form-group row mb-2">
                         <label class="col-sm-4 col-form-label">Jumlah</label>
-                        <div class="col-sm-8">
+                        <div class="input-group col-sm-8">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Rp.</span>
+                             </div>
                             <input type="number" class="form-control @error('jumlah') is-invalid @enderror" name="jumlah" placeholder="Jumlah">
                             @error('jumlah')
                             	<span class="invalid-feedback" role="alert">

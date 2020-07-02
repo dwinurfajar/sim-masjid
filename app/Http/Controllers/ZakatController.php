@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Zakat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use DataTables;
 
 class ZakatController extends Controller
 {
@@ -14,9 +13,24 @@ class ZakatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('backend/zakat/ajax');
+   
+        $zakat = Zakat::all();
+        if($request->ajax()){
+            return datatables()->of($zakat)
+                        ->addColumn('action', function($data){
+                            $button = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" data-original-title="Edit" class="edit badge badge-primary edit-post"><i class="far fa-edit"></i> Edit</a>';
+                            $button .= '&nbsp;&nbsp;';
+                            $button .= '<a href="javascript:void(0)" name="delete" id="'.$data->id.'" class="delete badge badge-danger"><i class="far fa-trash-alt"></i> Delete</a>';     
+                            return $button;
+                        })
+                        ->rawColumns(['action'])
+                        ->addIndexColumn()
+                        ->make(true);
+        }
+
+        return view('backend/zakat/zakat');
     }
 
     /**
@@ -37,9 +51,37 @@ class ZakatController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->all();
+         $id = $request->id;
+        
+        $post   =   Zakat::updateOrCreate(['id' => $id],
+                    [
+                        'nama' => $request->nama,
+                        'jenisZakat' => $request->jenisZakat,
+                        'jenisBayar' => $request->jenisBayar,
+                        'jumlah' => $request->jumlah,
+                        'tanggal' => $request->tanggal,
+                    ]); 
 
-        return response()->json(['success'=>'Got Simple Ajax Request.']);
+        return response()->json($post);
+        /*
+        $request->validate([
+            'nama' => 'required',
+            'jenisZakat' => 'required',
+            'jenisBayar' => 'required',
+            'jumlah' => 'required',
+            'tanggal' => 'required',
+        ]);
+
+        $masuk = new Zakat;
+        $masuk->nama = $request->nama;
+        $masuk->jenisZakat = $request->jenisZakat;
+        $masuk->jenisBayar = $request->jenisBayar;
+        $masuk->jumlah = $request->jumlah;
+        $masuk->tanggal = $request->tanggal;
+        $masuk->save();
+
+        return back()->with('status', 'Berhasil');
+        */
     }
 
     /**
@@ -50,7 +92,7 @@ class ZakatController extends Controller
      */
     public function show(Zakat $zakat)
     {
-        //
+        
     }
 
     /**
@@ -61,8 +103,8 @@ class ZakatController extends Controller
      */
     public function edit(Zakat $zakat)
     {
-        $where = array('id' => $id);
-        $post  = Pegawai::where($where)->first();
+         $where = array('id' => $zakat->id);
+        $post  = Zakat::where($where)->first();
      
         return response()->json($post);
     }
@@ -87,7 +129,7 @@ class ZakatController extends Controller
      */
     public function destroy(Zakat $zakat)
     {
-        $post = Pegawai::where('id',$id)->delete();
+        $post = Zakat::where('id',$zakat->id)->delete();
      
         return response()->json($post);
     }
