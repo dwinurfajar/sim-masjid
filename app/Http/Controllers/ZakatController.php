@@ -51,8 +51,11 @@ class ZakatController extends Controller
      */
     public function store(Request $request)
     {
-         $id = $request->id;
         
+        $id = $request->id;
+        $request->validate([
+            'nama' => 'required',
+        ]);
         $post   =   Zakat::updateOrCreate(['id' => $id],
                     [
                         'nama' => $request->nama,

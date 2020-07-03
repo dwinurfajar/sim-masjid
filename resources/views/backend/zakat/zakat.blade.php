@@ -21,17 +21,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
 
 
+    
+
+
+
 
 <a href="javascript:void(0)" class="btn btn-primary mb-4" id="tombol-tambah"><i class="fas fa-plus-square mr-2"></i>Tambah Zakat</a>
-    <!-- MULAI CONTAINER -->
+
 
 <div class="card mb-4">
-        <div class="card-header"><i class="fas fa-table mr-1"></i>Data Zakat Masjid</div>
+        <div class="card-header"><i class="fas fa-table mr-1 small"></i>Data Zakat Masjid</div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered"  id="table_pegawai" width="100%" cellspacing="0">
+                    <table class="table table-striped table-bordered"  id="table_pegawai" width="100%" cellspacing="0">
                         <thead>
                             <tr class="text-center">
+                                <th>No</th>
                                 <th>Nama</th>
                                 <th>Jenis Zakat</th>
                                 <th>Jenis Bayar</th>
@@ -65,8 +70,12 @@
                                 <div class="form-group row">
                                     <label for="name" class="col-sm-4 control-label">Nama</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="nama" name="nama"
-                                            value="" required>
+                                        <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" value="">
+                                        @error('nama')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -85,16 +94,40 @@
                                     <div class="col-sm-8">
                                         <select name="jenisBayar" id="jenisBayar" class="form-control required">
                                             <option value="">Pilih Jenis Bayar</option>
-                                            <option value="1">Beras</option>
-                                            <option value="0">Tunai</option>
+                                            <option value="b">Beras</option>
+                                            <option value="t">Tunai</option>
+                                            <option value="l">Lainnya</option>
                                         </select>
                                     </div>
                                 </div>
 
-                                <div class="form-group row">
-                                    <label  class="col-sm-4 col-form-label">Jumlah</label>
-                                    <div class="col-sm-8">
-                                        <input type="number" class="form-control" id="jumlah" name="jumlah" value=""
+                                <div class="form-group row t inputt">
+                                    <label  class="col-sm-4 control-label">Jumlah</label>
+                                    <div class="col-sm-8 input-group">
+                                      <div class="input-group-prepend">
+                                          <span class="input-group-text">Rp.</span>
+                                       </div>
+                                        <input type="number" class="form-control required" id="jumlahTn" name="jumlah" value=""
+                                            >
+                                    </div>
+                                </div>
+                                <div class="form-group row b inputt">
+                                    <label  class="col-sm-4 control-label">Jumlah</label>
+                                    <div class="col-sm-8 input-group">
+                                      <div class="input-group-prepend">
+                                          <span class="input-group-text">Kg. </span>
+                                       </div>
+                                        <input type="number" class="form-control" id="jumlahBrs" name="jumlah" value=""
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="form-group row l inputt">
+                                    <label  class="col-sm-4 control-label">Jumlah</label>
+                                    <div class="col-sm-8 input-group">
+                                      <div class="input-group-prepend">
+                                          <span class="input-group-text">Dll </span>
+                                       </div>
+                                        <input type="number" class="form-control" id="jumlahBrs" name="jumlah" value=""
                                             required>
                                     </div>
                                 </div>
@@ -125,38 +158,33 @@
             </div>
         </div>
     </div>
-    <!-- AKHIR MODAL -->
 
-    <!-- MULAI MODAL KONFIRMASI DELETE-->
 
     <div class="modal fade" tabindex="-1" role="dialog" id="konfirmasi-modal" data-backdrop="false">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">PERHATIAN</h5>
+                    <h5 class="modal-title">Konfirmasi Hapus</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p><b>Jika menghapus Pegawai maka</b></p>
-                    <p>*data pegawai tersebut hilang selamanya, apakah anda yakin?</p>
+                    <p>Apakah anda yakin ingin menghapus data?</p>
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger" name="tombol-hapus" id="tombol-hapus">Hapus
-                        Data</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal">batal</button>
+                    <button type="button" class="btn btn-danger" name="tombol-hapus" id="tombol-hapus">Ya, Lanjutkan</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- AKHIR MODAL -->
 
     <!-- LIBARARY JS -->
  
     
-<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
@@ -178,11 +206,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.js"
         integrity="sha256-siqh9650JHbYFKyZeTEAhq+3jvkFCG8Iz+MHdr9eKrw=" crossorigin="anonymous"></script>
 
-
     <!-- AKHIR LIBARARY JS -->
 
     <!-- JAVASCRIPT -->
     <script>
+        
+      //input form jenis bayar
+      $(document).ready(function(){
+          $("#jenisBayar").change(function(){
+              $(this).find("option:selected").each(function(){
+                  var optionValue = $(this).attr("value");
+                  console.log(optionValue);
+                  if(optionValue){
+                      $(".inputt").not("." + optionValue).hide();
+                      $("." + optionValue).show();
+                  } else{
+                      $(".inputt").hide();
+                  }
+              });
+          }).change();
+      });
         //CSRF TOKEN PADA HEADER
         //Script ini wajib krn kita butuh csrf token setiap kali mengirim request post, patch, put dan delete ke server
         $(document).ready(function () {
@@ -204,12 +247,23 @@
             $('#tambah-edit-modal').modal('show'); //modal tampil
         });
 });
+
         //MULAI DATATABLE
         //script untuk memanggil data json dari server dan menampilkannya berupa datatable
         $(document).ready(function () {
-            $('#table_pegawai').DataTable({
-                dom: 'Bfrtip',
-                buttons: ['copy', 'excel', 'pdf', 'print'],
+           var t = $('#table_pegawai').DataTable({
+              lengthMenu:   [
+                    [ 10, 25, 50, -1 ],[ '10', '25', '50', 'aria-label' ]
+                    ],
+                dom: 'Blfrtip',
+                
+                pageLength: 10,
+                buttons: [{extend: 'print', 
+                          className: 'excelButton',
+                          exportOptions:{
+                            columns: [0,1,2,3,4]
+                          }
+                        }],
                 processing: true,
                 serverSide: true, //aktifkan server-side 
                 ajax: {
@@ -217,6 +271,9 @@
                     type: 'GET'
                 },
                 columns: [{
+                        data: '',
+                    },
+                    {
                         data: 'nama',
                         name: 'nama'
                     },
@@ -247,11 +304,7 @@
                     {
                         data: 'tanggal',
                         name: 'tanggal',
-                        type: 'datetime',
-                        def: function () { return new Date(); },
-                        displayFormat: 'M/D/YYYY',
-                        wireFormat: 'YYYY-MM-DD',
-                        fieldInfo: 'US style m/d/y format',
+                        
                     },
                     {
                         data: 'action',
@@ -262,21 +315,44 @@
                 columnDefs: [
                     {
                         "targets": 5, // your case first column
-                        "className": "text-center"
+                        "className": "text-center", 
+                        width : '15%'
                    },
+                   {
+                        "targets": 4, // your case first column
+                        "className": "text-center",
+                        width : '15%'
+                   },
+                   {
+                        "targets": 3,
+                        "className": "text-right",
+                        width : '15%'
+                    },
                    {
                         "targets": 1,
                         "className": "text-center",
+                        width : '15%'
                     },
                    {
                         "targets": 2,
                         "className": "text-center",
+                        width : '15%'
+                    },
+                    {
+                        "searchable": false,
+                        "orderable": false,
+                        "targets": 0
                     }
                 ],
                 order: [
                     [4, 'desc']
                 ]
             });
+            t.on( 'order.dt search.dt', function () {
+                t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+                    cell.innerHTML = i+1;
+                } );
+            } ).draw();
         });
 
         //SIMPAN & UPDATE DATA DAN VALIDASI (SISI CLIENT)
@@ -321,7 +397,7 @@
         $('body').on('click', '.edit-post', function () {
             var data_id = $(this).data('id');
             $.get('zakat/' + data_id + '/edit', function (data) {
-                $('#modal-judul').html("Edit Post");
+                $('#modal-judul').html("Edit Zakat");
                 $('#tombol-simpan').val("edit-post");
                 $('#tambah-edit-modal').modal('show');
 

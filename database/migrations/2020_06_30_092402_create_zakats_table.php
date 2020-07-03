@@ -22,7 +22,9 @@ class CreateZakatsTable extends Migration
             $table->string('nama');
             $table->char('jenisZakat', 1);
             $table->char('jenisBayar', 1);
-            $table->integer('jumlah');
+            $table->string('lainnya')->nullable();
+            $table->integer('jumlahT');
+            $table->integer('jumlahBeras');
             $table->date('tanggal');
             $table->timestamps();
         });
