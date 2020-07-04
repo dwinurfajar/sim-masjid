@@ -5,7 +5,8 @@
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
+<script src="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.css" rel="stylesheet" />
 
 <div class="row">
   <div class="col-xl-6">
@@ -118,7 +119,58 @@
           </div>
 
 
+<div>
+                <label for="exampleFormControlInput1">Peta Persebaran Penerima Zakat</label>
 
+                <div class="col mb-4" id="map" style="height: 300px; width: 100%;"></div>
+                  <style>
+                    .masjid {
+                      background-image: url('{{asset('backend/marker/masjid.png')}}');
+                      background-size: cover;
+                      width: 40px;
+                      height: 40px;
+                      border-radius: 50%;
+                      cursor: pointer;
+                    }
+                  </style>
+                  <script>
+                    mapboxgl.accessToken = 'pk.eyJ1IjoiZHluYXRpYyIsImEiOiJja2JpcnpyaHQwaTcwMnNsdHZweTc2eXQ0In0.2dDt6graznsFCKEN64n1ZQ';
+                     var obj = JSON.parse('<?php echo json_encode($penerima) ?>')
+
+                      var locations = [];
+                      var i;
+
+                      for(i=0; i<obj.length; i++){                     
+                          locations[i] = [[obj[i].nama], [obj[i].latt], [obj[i].long], [obj[i].aktif]];
+                      }
+
+                      var map = new mapboxgl.Map({
+                          container: 'map',
+                          style: 'mapbox://styles/mapbox/streets-v11',
+                          center: [ 112.608752, -7.898696],
+                          zoom: 14
+
+                      });
+                      var mjd = document.createElement('div');
+                      mjd.className = 'masjid';
+                      var marker = new mapboxgl.Marker(mjd)
+                        .setLngLat([ 112.608752, -7.898696])
+                        .setPopup(new mapboxgl.Popup().setText('Masjid KH Ahmad Dahlan'))
+                        .addTo(map);
+                     
+                      for (i = 0; i < locations.length; i++) { 
+                       
+
+                         new mapboxgl.Marker({color: 'green'})
+                          .setLngLat([locations[i][2], locations[i][1]])
+                          .setPopup(new mapboxgl.Popup().setText(locations[i][0]))
+                          .addTo(map);
+                        
+
+                      };
+                      
+                  </script> 
+            </div>
 
 
 
