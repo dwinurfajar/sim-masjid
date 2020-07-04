@@ -16,9 +16,32 @@ class KeluarController extends Controller
     public function index()
     {
         $month = date('m');
-        $kluar = DB::table('keluars')->whereMonth('tanggal', $month)->orderBy('tanggal', 'desc')->get();
-        $keluar = DB::table('keluars')->orderBy('tanggal', 'desc')->get();
-        return view('backend/keuangan/keluar/keluar', compact('keluar','kluar'));
+        $year = date('yy');
+
+        $keluar = DB::table('keluars')->whereYear('tanggal', $year)->whereMonth('tanggal' , $month)->orderBy('tanggal', 'desc')->get();
+        return view('backend/keuangan/keluar/keluar', compact('keluar'));
+    }
+
+    public function filter(Request $request){
+
+        if(($request->tahun != null )&&($request->bulan == null)){
+            $keluar = DB::table('keluars')->whereYear('tanggal' , $request->tahun)->orderBy('tanggal', 'desc')->get();
+            return view('backend/keuangan/keluar/keluar', compact('keluar'));
+        }
+        elseif(($request->bulan != null )&&($request->tahun == null)){
+            $keluar = DB::table('keluars')->whereMonth('tanggal' , $request->bulan)->orderBy('tanggal', 'desc')->get();
+            return view('backend/keuangan/keluar/keluar', compact('keluar'));
+        }
+        elseif(($request->bulan != null )&&($request->tahun != null)){
+            $keluar = DB::table('keluars')->whereYear('tanggal', $request->tahun)->whereMonth('tanggal' , $request->bulan)->orderBy('tanggal', 'desc')->get();
+            return view('backend/keuangan/keluar/keluar', compact('keluar'));
+        }
+        else{
+            $month = date('m');
+            $keluar = DB::table('keluars')->whereMonth('tanggal', $month)->orderBy('tanggal', 'desc')->get();
+            return view('backend/keuangan/keluar/keluar', compact('keluar'))->with('status', 'Kesalahan');
+        }
+        
     }
 
     /**

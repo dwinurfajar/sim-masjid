@@ -15,16 +15,10 @@ class CreateZakatsTable extends Migration
     {
         Schema::create('zakats', function (Blueprint $table) {
             $table->id();
-            //$table->string('nama_pegawai',100);
-            //$table->string('jenis_kelamin',20);
-            //$table->string('email',100)->nullable();
-            //$table->string('alamat',150)->nullable();
             $table->string('nama');
             $table->char('jenisZakat', 1);
-            $table->char('jenisBayar', 1);
-            $table->string('lainnya')->nullable();
-            $table->integer('jumlahT');
-            $table->integer('jumlahBeras');
+            $table->integer('tunai')->nullable();
+            $table->decimal('beras')->nullable();
             $table->date('tanggal');
             $table->timestamps();
         });

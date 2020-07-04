@@ -16,10 +16,32 @@ class MasukController extends Controller
     public function index()
     {
         $month = date('m');
-        $msuk = DB::table('masuks')->whereMonth('tanggal', $month)->orderBy('tanggal', 'desc')->get();
-        $masuk = DB::table('masuks')->orderBy('tanggal', 'desc')->get();
-        //dump($month);
-        return view('backend/keuangan/masuk/masuk', compact('masuk', 'msuk'));
+        $year = date('yy');
+        
+        $masuk = DB::table('masuks')->whereYear('tanggal', $year)->whereMonth('tanggal' , $month)->orderBy('tanggal', 'desc')->get();
+        return view('backend/keuangan/masuk/masuk', compact('masuk'));
+    }
+
+    public function filter(Request $request){
+
+        if(($request->tahun != null )&&($request->bulan == null)){
+            $masuk = DB::table('masuks')->whereYear('tanggal' , $request->tahun)->orderBy('tanggal', 'desc')->get();
+            return view('backend/keuangan/masuk/masuk', compact('masuk'));
+        }
+        elseif(($request->bulan != null )&&($request->tahun == null)){
+            $masuk = DB::table('masuks')->whereMonth('tanggal' , $request->bulan)->orderBy('tanggal', 'desc')->get();
+            return view('backend/keuangan/masuk/masuk', compact('masuk'));
+        }
+        elseif(($request->bulan != null )&&($request->tahun != null)){
+            $masuk = DB::table('masuks')->whereYear('tanggal', $request->tahun)->whereMonth('tanggal' , $request->bulan)->orderBy('tanggal', 'desc')->get();
+            return view('backend/keuangan/masuk/masuk', compact('masuk'));
+        }
+        else{
+            $month = date('m');
+            $masuk = DB::table('masuks')->whereMonth('tanggal', $month)->orderBy('tanggal', 'desc')->get();
+            return view('backend/keuangan/masuk/masuk', compact('masuk'))->with('status', 'Kesalahan');
+        }
+        
     }
 
     /**

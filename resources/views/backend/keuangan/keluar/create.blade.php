@@ -58,8 +58,8 @@
 						$('.date').datepicker({ format: 'yyyy-mm-dd'});  
 					</script>
                     <div class="col text-center">
-				        <a href="{{route('keluar.index')}}" class="btn btn-danger col-4 mb-1" type="button"><i class="fas fa-window-close mr-1"></i>Batal</a>
-				        <button class="btn btn-primary col-4 mb-1" type="submit"><i class="fas fa-check-square mr-1"></i>Simpan</button>
+				        <a href="{{route('keluar.index')}}" class="btn btn-danger col-5 mb-1" type="button"><i class="fas fa-window-close mr-1"></i>Batal</a>
+				        <button class="btn btn-primary col-5 mb-1" type="submit"><i class="fas fa-check-square mr-1"></i>Simpan</button>
 				        </form>
 				    </div>
                 </div>

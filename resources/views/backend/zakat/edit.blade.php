@@ -1,6 +1,6 @@
 @extends('backend/master')
-@section('title', 'Tambah')
-@section('state', '/ Zakat / Tambah')
+@section('title', 'Edit')
+@section('state', '/ Zakat / Edit')
 @section('content')
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
@@ -8,14 +8,15 @@
 
 <div class="row justify-content-center">
 	<div class="col-sm-6 ">
-        <form method="post" action="{{route('zakat.store')}}">
+        <form method="post" action="{{route('zakat.update', $zakat->id)}}">
             @csrf
+            @method('PATCH')
             <div class="row">
                 <div class="col">
                     <div class="form-group row mb-2">
                         <label class="col-sm-4 col-form-label">Nama</label>
                         <div class="col-sm-8 input-group">
-                            <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" placeholder="Nama">
+                            <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{$zakat->nama}}">
                             @error('nama')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -27,7 +28,14 @@
                         <label class="col-sm-4 col-form-label">Jenis Zakat</label>
                         <div class="col-sm-8">
                             <select class="custom-select @error('jenisZakat') is-invalid @enderror" name="jenisZakat">
-                                <option selected disabled value="">Pilih</option>
+                                <option selected value="{{$zakat->jenisZakat}}">
+                                    <?php $jenisZakat = $zakat->jenisZakat ; ?>
+                                    @if($jenisZakat == 1 )
+                                        Fitrah
+                                    @else
+                                        Mal
+                                    @endif
+                                </option>
                                 <option value="1">Zakal Fitrah</option>
                                 <option value="0">Zakat Mal</option>
                             </select>
@@ -46,7 +54,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Rp.</span>
                              </div>
-                            <input type="number" class="form-control @error('tunai') is-invalid @enderror" name="tunai" placeholder="Tunai">
+                            <input type="number" class="form-control @error('tunai') is-invalid @enderror" name="tunai" value="{{$zakat->tunai}}">
                             @error('tunai')
                             	<span class="invalid-feedback" role="alert">
                                 	<strong>{{ $message }}</strong>
@@ -60,7 +68,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Kg.</span>
                              </div>
-                            <input type="text" class="form-control @error('beras') is-invalid @enderror" name="beras" placeholder="Beras">
+                            <input type="text" class="form-control @error('beras') is-invalid @enderror" name="beras" value="{{$zakat->beras}}">
                             @error('beras')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -73,7 +81,7 @@
                     <div class="form-group row mb-2">
                         <label class="col-sm-4 col-form-label">Tanggal</label>
 						<div class="col-sm-8">
-                            <input class="date form-control @error('tanggal') is-invalid @enderror" type="text" name="tanggal" placeholder="Tanggal">
+                            <input class="date form-control @error('tanggal') is-invalid @enderror" type="text" name="tanggal" value="{{$zakat->tanggal}}">
 							@error('tanggal')
 					            <span class="invalid-feedback" role="alert">
 					            	<strong>{{ $message }}</strong>

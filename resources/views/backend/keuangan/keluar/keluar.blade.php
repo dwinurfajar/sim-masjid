@@ -6,20 +6,33 @@
   	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
 
+<div class="row">
+  <div class="col-xl-6 input-group mb-3 ">
+    <form class="input-group" method="post" action="{{route('filter.keluar')}}"> 
+      @csrf
+      <label class="input-group">Pilih data berdasarkan : </label>
+      <input type="number" name="tahun" class="form-control" placeholder="Tahun" >
+      <input type="number" name="bulan" class="form-control" placeholder="Bulan" >
+      <div class="input-group-append">
+        <button class="btn btn-primary" type="submit">SET</button>
+      </div>
+    </form>
+  </div>
+</div>
 
-  <div class="row">
-              <div class="col-xl-6">
+<div class="row">
+  <div class="col-xl-6">
                                 <div class="card mb-4">
                                     <div class="card-header"><i class="fas fa-chart-area mr-1"></i>Kas Keluar Bulan Ini</div>
                                     <div class="card-body"><canvas id="keluarChart" width="100%" height="40"></canvas></div>
                                 </div>
-                            </div>
-                        </div>
+  </div>
+</div>
 
-	<!-- Button trigger modal -->
-	<a href="{{route('keluar.create')}}" class="btn btn-primary mb-4">
-	  <i class="fas fa-plus-square mr-2"></i>Tambah Data
-	</a>
+
+<a href="{{route('keluar.create')}}" class="btn btn-primary mb-4">
+	<i class="fas fa-plus-square mr-2"></i>Tambah Data
+</a>
 
     <div class="card mb-4">
         <div class="card-header"><i class="fas fa-table mr-1"></i>Data Kas Keluar Masjid</div>
@@ -52,7 +65,6 @@
             						      	<td>{{ $klr->keterangan}}</td>
             						      	<td class="text-center">{{ date('d-M-Y', strtotime($klr->tanggal)) }}</td>
             								    <td class="text-center">
-            								 	    <a type="button" href="{{route('keluar.show', $klr->id)}}"  class="badge badge-primary"><i class="fas fa-info-circle mr-1"></i>Detail</a>
 
                                   <a type="button" href="{{route('keluar.edit', $klr->id)}}" class="badge badge-success"><i class="fas fa-edit mr-1"></i>Edit</a>
 
@@ -110,7 +122,7 @@
 
 <script type="text/javascript">
   //line
-  var obj = JSON.parse('<?php echo json_encode($kluar) ?>')
+  var obj = JSON.parse('<?php echo json_encode($keluar) ?>')
     var label = [];
     var data1 = [];
      var i, j =0;

@@ -34,11 +34,13 @@ Route::group(['prefix'=>'dashboard', 'middleware'=>['auth']], function(){
 	Route::resource('jamaah', 'JamaahController');
 
 	Route::resource('masuk', 'MasukController');
+	Route::post('filter-masuk', 'MasukController@filter')->name('filter.masuk');
+
 	Route::resource('keluar', 'KeluarController');
+	Route::post('filter-keluar', 'KeluarController@filter')->name('filter.keluar');
+
 	Route::resource('saldo', 'SaldoController');
 
 	Route::resource('zakat', 'ZakatController');
 
-	Route::get('/ajaxRequest', 'SaldoController@ajaxIndex');
-	Route::post('/postajax', 'SaldoController@ajaxRespon');
 });

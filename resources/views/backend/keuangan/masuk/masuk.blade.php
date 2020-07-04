@@ -3,42 +3,41 @@
 @section('state', '/ Kas Masuk')
 @section('content')
 
-    <!-- load jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-    <!-- provide the csrf token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
-
-<div class="input-group mb-4">
-  <div class="input-group">
-    <input class="form-control col" type="number" name="tahun" placeholder="Filter data berdasar tahun">
-    <input class="form-control col" type="number" name="bulan" placeholder="Filter data berdasar bulan">
-    <button class="btn-sm btn-success col-2 ajaxBTN">SET</button>
+<div class="row">
+  <div class="col-xl-6 input-group mb-3 ">
+    <form class="input-group" method="post" action="{{route('filter.masuk')}}"> 
+      @csrf
+      <label class="input-group">Pilih data berdasarkan : </label>
+      <input type="number" name="tahun" class="form-control" placeholder="Tahun" >
+      <input type="number" name="bulan" class="form-control" placeholder="Bulan" >
+      <div class="input-group-append">
+        <button class="btn btn-primary" type="submit">SET</button>
+      </div>
+    </form>
   </div>
-  
 </div>
-  <div class="row">
-              <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card-header"><i class="fas fa-chart-area mr-1"></i>Kas Masuk Bulan Ini</div>
-                                    <div class="card-body"><canvas id="masukChart" width="100%" height="40"></canvas></div>
-                                </div>
-                            </div>
-                            <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card-header"><i class="fas fa-chart-pie mr-1"></i>Keterangan</div>
-                                    <div class="card-body"><canvas id="ketChart" width="100%" height="40"></canvas></div>
-                                </div>
-                            </div>
-                        </div>
+
+<div class="row">
+  <div class="col-xl-6">
+    <div class="card mb-4">
+      <div class="card-header"><i class="fas fa-chart-area mr-1"></i>Kas Masuk Bulan Ini</div>
+      <div class="card-body"><canvas id="masukChart" width="100%" height="40"></canvas></div>
+    </div>
+  </div>
+  <div class="col-xl-6">
+    <div class="card mb-4">
+      <div class="card-header"><i class="fas fa-chart-pie mr-1"></i>Keterangan</div>
+      <div class="card-body"><canvas id="ketChart" width="100%" height="40"></canvas></div>
+    </div>
+  </div>
+</div>
 	<!-- Button trigger modal -->
-	<a href="{{route('masuk.create')}}" class="btn btn-primary mb-4">
-	  <i class="fas fa-plus-square mr-2"></i>Tambah Data
-	</a>
+<a href="{{route('masuk.create')}}" class="btn btn-primary mb-4">
+	<i class="fas fa-plus-square mr-2"></i>Tambah Data
+</a>
 
     <div class="card mb-4">
         <div class="card-header"><i class="fas fa-table mr-1"></i>Data Kas Masuk Masjid</div>
@@ -83,7 +82,6 @@
             						      	<td>{{ $msk->sumber}}</td>
             						      	<td class="text-center">{{ date('d-M-Y', strtotime($msk->tanggal)) }}</td>
             								    <td class="text-center">
-            								 	    <a type="button" href="{{route('masuk.show', $msk->id)}}"  class="badge badge-primary"><i class="fas fa-info-circle mr-1"></i>Detail</a>
 
                                   <a type="button" href="{{route('masuk.edit', $msk->id)}}" class="badge badge-success"><i class="fas fa-edit mr-1"></i>Edit</a>
 
@@ -167,7 +165,7 @@
        });
 
   //line
- var obj = JSON.parse('<?php echo json_encode($msuk) ?>')
+ var obj = JSON.parse('<?php echo json_encode($masuk) ?>')
     var label = [];
     var data1 = [];
     var i, j =0;
