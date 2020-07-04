@@ -40,7 +40,9 @@ Route::group(['prefix'=>'dashboard', 'middleware'=>['auth']], function(){
 	Route::post('filter-keluar', 'KeluarController@filter')->name('filter.keluar');
 
 	Route::resource('saldo', 'SaldoController');
+	Route::post('filter-saldo', 'SaldoController@filter')->name('filter.saldo');
 
 	Route::resource('zakat', 'ZakatController');
+	Route::post('filter-zakat', 'ZakatController@filter')->name('filter.zakat');
 
 });

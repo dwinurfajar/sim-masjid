@@ -11,37 +11,41 @@ class SaldoController extends Controller
 {
     public function index(){
 
-        $month = date('m');
+      $month = date('m');
+      $year = date('yy');
 
-    	$msk = DB::table('masuks')->sum('jumlah');
-    	$klr = DB::table('keluars')->sum('jumlah');
-    	$saldo = $msk-$klr;
+    	$masuk = DB::table('masuks')->whereYear('tanggal', $year)->whereMonth('tanggal', $month)->orderBy('tanggal', 'asc')->get();
+    	$keluar = DB::table('keluars')->whereYear('tanggal', $year)->whereMonth('tanggal', $month)->orderBy('tanggal', 'asc')->get();
 
-    	$masuk = DB::table('masuks')->select('jumlah', 'tanggal')->whereMonth('tanggal', $month)->orderBy('tanggal', 'asc')->get();
-    	$keluar = DB::table('keluars')->select('jumlah', 'tanggal')->whereMonth('tanggal', $month)->orderBy('tanggal', 'asc')->get();
-
-    	//$masuk = json_encode($masuk);
-        //dump($keluar);
-        return view('backend/keuangan/saldo/saldo', compact('saldo', 'masuk', 'msk','keluar', 'klr'));
+        //dump($masuk, $keluar);
+      return view('backend/keuangan/saldo/saldo', compact('masuk','keluar',));
     }
 
-    public function ajaxIndex(){
-        return view('backend/keuangan/masuk/ajax');
-    }
-    public function ajaxRespon(Request $request){
+    public function filter(Request $request){
 
-        //$data = DB::table('masuks')->where('id', $request->message)->first();
-        //
+        if(($request->tahun != null )&&($request->bulan == null)){
+            $masuk = DB::table('masuks')->whereYear('tanggal' , $request->tahun)->orderBy('tanggal', 'desc')->get();
+            $keluar = DB::table('keluars')->whereYear('tanggal' , $request->tahun)->orderBy('tanggal', 'desc')->get();
+            return view('backend/keuangan/saldo/saldo', compact('masuk', 'keluar'));
+        }
+        elseif(($request->bulan != null )&&($request->tahun == null)){
+            $masuk = DB::table('masuks')->whereMonth('tanggal' , $request->bulan)->orderBy('tanggal', 'desc')->get();
+            $keluar = DB::table('keluars')->whereMonth('tanggal' , $request->bulan)->orderBy('tanggal', 'desc')->get();
+            return view('backend/keuangan/saldo/saldo', compact('masuk', 'keluar'));
+        }
+        elseif(($request->bulan != null )&&($request->tahun != null)){
+            $masuk = DB::table('masuks')->whereYear('tanggal', $request->tahun)->whereMonth('tanggal' , $request->bulan)->orderBy('tanggal', 'desc')->get();
+            $keluar = DB::table('keluars')->whereYear('tanggal', $request->tahun)->whereMonth('tanggal' , $request->bulan)->orderBy('tanggal', 'desc')->get();
 
-          
-        $data = DB::table('masuks')->select('jumlah', 'tanggal')->whereYear('tanggal', $request->tahun)->whereMonth('tanggal', $request->bulan)->orderBy('tanggal', 'asc')->get();
-
+            return view('backend/keuangan/saldo/saldo', compact('masuk', 'keluar'));
+        }
+        else{
+            $month = date('m');
+            $masuk = DB::table('masuks')->whereMonth('tanggal', $month)->orderBy('tanggal', 'desc')->get();
+            $keluar = DB::table('keluars')->whereMonth('tanggal', $month)->orderBy('tanggal', 'desc')->get();
+            return view('backend/keuangan/saldo/saldo', compact('masuk', 'keluar'));
+        }
         
-
-         $response = array(
-          'status' => 'success',
-          'msg' => $data,
-      );
-      return response()->json($response);
     }
+
 }

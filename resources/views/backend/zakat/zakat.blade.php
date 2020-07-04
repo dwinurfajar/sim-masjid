@@ -9,7 +9,7 @@
 
 <div class="row">
   <div class="col-xl-6">
-    <form class="input-group mb-4" method="post" action="{{route('filter.masuk')}}"> 
+    <form class="input-group mb-4" method="post" action="{{route('filter.zakat')}}"> 
         @csrf
         <label class="input-group">Pilih data berdasarkan : </label>
         <input type="number" name="tahun" class="form-control" placeholder="Tahun" >
@@ -24,19 +24,25 @@
   <div class="col-xl-3 col-md-6">
     <div class="card bg-muted mb-4">
         <div class="card-header ">Jumlah Penerimaan Zakat</div>
-        <div class="card-body"><i class="fas fa-user"></i> {{$j_zakat}} </div>
+        <div class="card-body text-center" id="jumlah_zakat"><i class="fas fa-user"></i> </div>
     </div>
   </div>
   <div class="col-xl-3 col-md-6">
     <div class="card bg-muted mb-4">
         <div class="card-header ">Jumlah Penerimaan Tunai</div>
-        <div class="card-body"><i class="fal fa-alarm"></i>Rp. {{$j_tunai}} </div>
+        <div class="card-body text-center" id="jumlah_tunai"> </div>
     </div>
   </div>
   <div class="col-xl-3 col-md-6">
     <div class="card bg-muted mb-4">
         <div class="card-header ">Jumlah Penerimaan Beras</div>
-        <div class="card-body"><i class="fal fa-money-check-edit-alt"></i>Kg. {{$j_beras}} </div>
+        <div class="card-body text-center" id="jumlah_beras"></div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-md-6">
+    <div class="card bg-muted mb-4">
+        <div class="card-header ">Jumlah Penerima Zakat</div>
+        <div class="card-body text-center" id="jumlah_penerima"></div>
     </div>
   </div>
 
@@ -120,7 +126,7 @@
         <div class="card-header"><i class="fas fa-table mr-1"></i>Data Penerima Zakat</div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-bordered" id="dataTableZakat" width="100%" cellspacing="0">
                         <thead>
                             <tr class="text-center">
                                 <th>No</th>
@@ -206,10 +212,41 @@
 </script>
 
 <script type="text/javascript">
+    $(document).ready(function () {
+        $('#dataTableZakat').DataTable({
+            dom: 'Bfrtip',
+            buttons: ['copy', 'excel', 'pdf', 'print']
+        });
 
+    });
 
-    var tunai = JSON.parse('<?php echo json_encode($j_z_tunai) ?>')
-    var beras = JSON.parse('<?php echo json_encode($j_z_beras) ?>')
+    var objek_penerima = JSON.parse('<?php echo json_encode($penerima) ?>')
+    var objek_zakat = JSON.parse('<?php echo json_encode($zakat) ?>')
+    var jumlah_zakat = objek_zakat.length;
+    var jumlah_tunai = 0;
+    var jumlah_beras = 0;
+    var tunai = 0;
+    var beras = 0;
+
+    //console.log(objek_zakat[1].beras);
+    for(i=0; i<objek_zakat.length; i++){                     
+        jumlah_tunai = jumlah_tunai+objek_zakat[i].tunai;
+        if(objek_zakat[i].beras != null){
+            jumlah_beras = jumlah_beras + Number(objek_zakat[i].beras) ;
+        }
+        if(objek_zakat[i].tunai != null){
+            tunai++;
+        }
+        if(objek_zakat[i].beras != null){
+            beras++;
+        }
+    }
+
+    document.getElementById('jumlah_zakat').innerHTML = jumlah_zakat;
+    document.getElementById('jumlah_tunai').innerHTML ="Rp. "+jumlah_tunai;
+    document.getElementById('jumlah_beras').innerHTML ="Kg. "+jumlah_beras;
+    document.getElementById('jumlah_penerima').innerHTML = objek_penerima.length+" orang";
+
 
                     var ctxP = document.getElementById("jnsChart").getContext('2d');
                     var myPieChart = new Chart(ctxP, {

@@ -16,17 +16,21 @@ class ZakatController extends Controller
      */
     public function index(Request $request)
     {
+        $year = date('yy');
+        $penerima = DB::table('jamaahs')->where('zakat', '1')->get();
+        $zakat = DB::table('zakats')->whereYear('tanggal', $year)->orderBy('tanggal', 'desc')->get();
+
+        //dump($j_penerima);
+        return view('backend/zakat/zakat', compact('zakat','penerima'));
+    }
+    public function filter(Request $request){
         $penerima = DB::table('jamaahs')->where('zakat', '1')->get();
    
-        $zakat = DB::table('zakats')->get();
-        $j_z_tunai = DB::table('zakats')->whereNotNull('tunai')->count();
-        $j_z_beras = DB::table('zakats')->whereNotNull('beras')->count();
-        $j_zakat = DB::table('zakats')->count();
-        $j_tunai = DB::table('zakats')->sum('tunai');
-        $j_beras = DB::table('zakats')->sum('beras');
 
-        //dump($penerima);
-        return view('backend/zakat/zakat', compact('zakat', 'j_z_tunai', 'j_z_beras', 'j_zakat', 'j_tunai','j_beras', 'penerima'));
+        $zakat = DB::table('zakats')->whereYear('tanggal', $request->tahun)->orderBy('tanggal', 'desc')->get();
+        //dump($zakat);
+        return view('backend/zakat/zakat', compact('zakat', 'penerima'));
+        
     }
 
     /**

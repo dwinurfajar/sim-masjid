@@ -21,6 +21,24 @@
 </div>
 
 <div class="row">
+  <div class="col-xl-3 col-md-6">
+    <div class="card bg-muted mb-4">
+        <div class="card-header text-center">Jumlah Data Masuk</div>
+        <div class="card-body text-center" id="jumlah_data"> </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-md-6">
+    <div class="card bg-muted mb-4">
+        <div class="card-header text-center">Jumlah Kas Masuk</div>
+        <div class="card-body text-center" id="jumlah_masuk"> </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  
+
+
   <div class="col-xl-6">
     <div class="card mb-4">
       <div class="card-header"><i class="fas fa-chart-area mr-1"></i>Kas Masuk Bulan Ini</div>
@@ -165,15 +183,26 @@
        });
 
   //line
- var obj = JSON.parse('<?php echo json_encode($masuk) ?>')
+ var objek_masuk = JSON.parse('<?php echo json_encode($masuk) ?>')
+
+  var jumlah_masuk = 0;
+
+  for (var i = 0; i < objek_masuk.length; i++) {
+     jumlah_masuk = jumlah_masuk + objek_masuk[i].jumlah;
+  }
+
+  document.getElementById('jumlah_data').innerHTML =objek_masuk.length;
+  document.getElementById('jumlah_masuk').innerHTML ="Rp. "+jumlah_masuk;
+
+
     var label = [];
     var data1 = [];
     var i, j =0;
-    console.log(obj);
 
-    for(i=obj.length-1; i>=0; i--){                     
-        label[j] =  [obj[i].tanggal];
-        data1[j] = [obj[i].jumlah];
+
+    for(i=objek_masuk.length-1; i>=0; i--){                     
+        label[j] =  [objek_masuk[i].tanggal];
+        data1[j] = [objek_masuk[i].jumlah];
         j++;
     }
 
@@ -207,10 +236,10 @@ var dll = 0;
 var i;
 
 
-for(i=0; i<obj.length; i++){  
-  if([obj[i].keterangan] == 'I'){
+for(i=0; i<objek_masuk.length; i++){  
+  if([objek_masuk[i].keterangan] == 'I'){
                           inf++;
-                        }else if([obj[i].keterangan] == 'S'){
+                        }else if([objek_masuk[i].keterangan] == 'S'){
                           sdk++;
                         }else{
                           dll++;

@@ -21,6 +21,21 @@
 </div>
 
 <div class="row">
+  <div class="col-xl-3 col-md-6">
+    <div class="card bg-muted mb-4">
+        <div class="card-header text-center">Jumlah Data keluar</div>
+        <div class="card-body text-center" id="jumlah_data"> </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-md-6">
+    <div class="card bg-muted mb-4">
+        <div class="card-header text-center">Jumlah Kas Keluar</div>
+        <div class="card-body text-center" id="jumlah_keluar"> </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
   <div class="col-xl-6">
                                 <div class="card mb-4">
                                     <div class="card-header"><i class="fas fa-chart-area mr-1"></i>Kas Keluar Bulan Ini</div>
@@ -122,15 +137,22 @@
 
 <script type="text/javascript">
   //line
-  var obj = JSON.parse('<?php echo json_encode($keluar) ?>')
+  var objek_keluar = JSON.parse('<?php echo json_encode($keluar) ?>')
+
+  var jumlah_keluar = 0;
+  for (var i = 0; i < objek_keluar.length; i++) {
+     jumlah_keluar = jumlah_keluar + objek_keluar[i].jumlah;
+  }
+  document.getElementById('jumlah_data').innerHTML =objek_keluar.length;
+  document.getElementById('jumlah_keluar').innerHTML ="Rp. "+jumlah_keluar;
+
     var label = [];
     var data1 = [];
      var i, j =0;
-    console.log(obj);
 
-    for(i=obj.length-1; i>=0; i--){                     
-        label[j] =  [obj[i].tanggal];
-        data1[j] = [obj[i].jumlah];
+    for(i=objek_keluar.length-1; i>=0; i--){                     
+        label[j] =  [objek_keluar[i].tanggal];
+        data1[j] = [objek_keluar[i].jumlah];
         j++;
     }
 
