@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'HomeController@view');
+Route::get('/', 'FrontController@index');
 
 Auth::routes();
 

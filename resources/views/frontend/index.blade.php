@@ -164,10 +164,10 @@
         <div class="profil-container section-container">
             <div class="container">
                 <div class="row">
-                    <div class="col profil section-description wow fadeIn">
+                    <div class="col profil">
                         <h2>Profil</h2>
                         <div class="divider-1 wow fadeInUp"><span></span></div>
-                        <p>We've completed 537 projects since we started back in 2010. Check them out!</p>
+                        <p>ini halaman profil</p>
                     </div>
                 </div>
             </div>
