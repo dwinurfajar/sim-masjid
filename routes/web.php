@@ -41,4 +41,6 @@ Route::group(['prefix'=>'dashboard', 'middleware'=>['auth']], function(){
 	Route::resource('zakat', 'ZakatController');
 	Route::post('filter-zakat', 'ZakatController@filter')->name('filter.zakat');
 
+	Route::resource('kegiatan', 'KegiatanController');
+
 });

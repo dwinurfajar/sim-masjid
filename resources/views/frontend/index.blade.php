@@ -53,6 +53,9 @@
                             <a class="nav-link scroll-link" href="#zakat">Zakat</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link scroll-link" href="#kegiatan">Kegiatan</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link scroll-link" href="#profil">Profil</a>
                         </li>
                     </ul>
@@ -84,7 +87,7 @@
                     <div class="col jamaah mt-4">
                         <h1>Jamaah</h1>
                         <h5 id="total_jamaah"></h5>
-                        <label for="exampleFormControlInput1">Peta Persebaran Jamaah</label>
+                        <label>Peta Persebaran Jamaah</label>
 
                         <div class="col" id="map" style="height: 400px; width: 100%;"></div>
                         <style>
@@ -157,7 +160,30 @@
             </div>
         </div>
         
-        <!-- Portfolio -->
+        <div class="kegiatan-container section-container">
+            <div class="container">
+                <div class="row">
+                    <div class="col kegiatan">
+                        <h2>Kegiatan</h2>
+                        <h5>Daftar kegiatan yang akan datang</h5>
+                        @foreach ($kegiatan as $kgt)
+                            <div class="row justify-content-center">
+                                <div class="col-8 card mb-3">
+                                    <div class="card-body">
+                                        <h3 class="card-title">{{$kgt->nama}}</h3>
+                                        <div class="card-subtitle">Pukul {{$kgt->pukul}} WIB tanggal {{ date('d M Y', strtotime($kgt->tanggal)) }}, di {{$kgt->tempat}}</div>
+                                        <p>{{$kgt->deskripsi}}</p>
+
+                                    </div>
+                                </div>
+                                
+                                
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="profil-container section-container">
             <div class="container">
                 <div class="row">

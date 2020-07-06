@@ -16,12 +16,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
 
 
-        
-
-
-
-
-
 
 
 
@@ -82,6 +76,8 @@
                             </div>
                             <a class="nav-link" href="{{route('zakat.index')}}">
                             <div class="sb-nav-link-icon"><i class="fas fa-hand-holding-usd"></i></div>Zakat</a>
+                            <a class="nav-link" href="{{route('kegiatan.index')}}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-clipboard-list"></i></div>Kegiatan</a>
                             
 
                         </div>
