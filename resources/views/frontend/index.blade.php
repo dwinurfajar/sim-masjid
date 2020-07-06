@@ -199,7 +199,6 @@
 
         <script src="{{asset('frontend/assets/js/jquery.backstretch.min.js')}}"></script>
         <script src="{{asset('frontend/assets/js/wow.min.js')}}"></script>
-
         <script src="{{asset('frontend/assets/js/waypoints.min.js')}}"></script>
         <script src="{{asset('frontend/assets/js/scripts.js')}}"></script>
 
