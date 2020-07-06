@@ -23,6 +23,13 @@ class CreateProfilsTable extends Migration
             $table->string('foto_bendahara')->default('default-avatar.png');
             $table->timestamps();
         });
+        DB::table('profils')->insert(
+            array(
+                'ketua' => 'Fulan',
+                'sekretaris' => 'Fulan',
+                'bendahara' => 'Fulan'
+            )
+        );
     }
 
     /**

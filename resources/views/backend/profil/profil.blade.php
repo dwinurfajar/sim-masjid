@@ -6,7 +6,7 @@
 <div class="row">
 	<div class="col-sm-4 text-center">
 		<h5>Ketua</h5>
-      	<img style="width: 240px; height: 240px; border-radius: 50%" src="/uploads/avatars/foto_ketua" >
+      	<img style="width: 240px; height: 240px; border-radius: 50%" src="/uploads/avatars/{{$profil->foto_ketua}}" >
       	<div class="">
       	<form enctype="multipart/form-data" method="post" action="{{route('upload.foto')}}">
       		@csrf
@@ -29,7 +29,7 @@
     </div>
     <div class="col-sm-4 text-center">
 		<h5>Sekretaris</h5>
-      	<img style="width: 240px; height: 240px; border-radius: 50%" src="/uploads/avatars/foto_sekretaris" >
+      	<img style="width: 240px; height: 240px; border-radius: 50%" src="/uploads/avatars/{{$profil->foto_sekretaris}}" >
       	<div class="">
       	<form enctype="multipart/form-data" method="post" action="{{route('upload.foto')}}">
       		@csrf
