@@ -34,7 +34,7 @@
         <!-- Top menu -->
         <nav class="navbar navbar-dark fixed-top navbar-expand-md navbar-no-bg">
             <div class="container">
-                <a class="navbar-brand" href="index.html">Masjid KH Ahmad Dahlan</a>
+                <a class="navbar-brand" href="/">Masjid KH Ahmad Dahlan</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -199,7 +199,7 @@
 
         <script src="{{asset('frontend/assets/js/jquery.backstretch.min.js')}}"></script>
         <script src="{{asset('frontend/assets/js/wow.min.js')}}"></script>
-           
+
         <script src="{{asset('frontend/assets/js/waypoints.min.js')}}"></script>
         <script src="{{asset('frontend/assets/js/scripts.js')}}"></script>
 
