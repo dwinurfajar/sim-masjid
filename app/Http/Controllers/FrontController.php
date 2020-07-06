@@ -12,7 +12,7 @@ class FrontController extends Controller
 {
 	public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('guest');
     }
     public function index(){
         $jamaah = DB::table('jamaahs')->get();
