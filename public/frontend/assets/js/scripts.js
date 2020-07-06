@@ -30,7 +30,7 @@ jQuery(document).ready(function() {
         Background slideshow
     */
     $('.top-content').backstretch("frontend/assets/img/backgrounds/masjid.jpg");
-    /*
+    
     $('.call-to-action-container').backstretch("assets/img/backgrounds/1.jpg");
     $('.testimonials-container').backstretch("assets/img/backgrounds/1.jpg");
     
@@ -44,7 +44,7 @@ jQuery(document).ready(function() {
     $('a[data-toggle="tab"]').on('shown.bs.tab', function(){
     	$('.testimonials-container').backstretch("resize");
     });
-    */
+
     /*
         Wow
     */

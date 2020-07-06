@@ -9,27 +9,24 @@
         
         <title>Masjid KH Ahmad Dahlan</title>
 
-        <!-- CSS --><!--
+        <!-- CSS -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css">
-        <link rel="stylesheet" href="assets/css/media-queries.css">-->
-        <link rel="stylesheet" href="{{asset('frontend/assets/css/animate.css')}}">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css">
+        <link rel="stylesheet" href="{{asset('frontend/assets/css/media-queries.css')}}">
+        <link rel="stylesheet" href="{{asset('frontend/assets/css/animate.css')}}">  
         <link rel="stylesheet" href="{{asset('frontend/assets/css/style.css')}}">
 
         <!-- Favicon and touch icons -->
-        <link rel="shortcut icon" href="{{asset('frontend/assets/ico/favicon.png')}}"><!--
+        <link rel="shortcut icon" href="{{asset('frontend/assets/ico/favicon.png')}}">
         <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
 
-        -->
 
-        <!-- Maps -->
-        <script src="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.js"></script>
-        <link href="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.css" rel="stylesheet" />
+        
     </head>
 
     <body>
@@ -194,21 +191,21 @@
 
 
         <!-- Javascript -->
-        
-        <!--
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script src="assets/js/retina-1.1.0.min.js"></script>-->
 
-
-        <script src="{{asset('frontend/assets/js/wow.min.js')}}"></script>
         <script src="{{asset('frontend/assets/js/jquery-3.2.1.min.js')}}"></script>
         <script src="{{asset('frontend/assets/js/jquery-migrate-3.0.0.min.js')}}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
         <script src="{{asset('frontend/assets/js/jquery.backstretch.min.js')}}"></script>
+        <script src="{{asset('frontend/assets/js/wow.min.js')}}"></script>
+           
         <script src="{{asset('frontend/assets/js/waypoints.min.js')}}"></script>
         <script src="{{asset('frontend/assets/js/scripts.js')}}"></script>
 
-
+        <!-- Maps -->
+        <script src="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.js"></script>
+        <link href="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.css" rel="stylesheet" />
         <script type="text/javascript">
             mapboxgl.accessToken = 'pk.eyJ1IjoiZHluYXRpYyIsImEiOiJja2JpcnpyaHQwaTcwMnNsdHZweTc2eXQ0In0.2dDt6graznsFCKEN64n1ZQ';
                     var objek_jamaah = JSON.parse('<?php echo json_encode($jamaah) ?>')
