@@ -24,7 +24,12 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+
         -->
+
+        <!-- Maps -->
+        <script src="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.js"></script>
+        <link href="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.css" rel="stylesheet" />
     </head>
 
     <body>
@@ -66,10 +71,7 @@
                     <div class="col-md-8 offset-md-2 text">
                         <h1 class="wow fadeInLeftBig">Masjid KH Ahmad Dahlan</h1>
                         <div class="description wow fadeInLeftBig">
-                            <p>
-                            This is a free responsive one page template made with the Bootstrap framework. 
-                            Check it out now. Download it, customize and use it as you like!
-                            </p>
+                        <h5>Selamat datang di website Masjid Ahmad Dahlan</h5>
                         </div>
                     </div>
                 </div>
@@ -82,20 +84,22 @@
         <div class="jamaah-container section-container section-container-gray-bg">
             <div class="container">
                 <div class="row">
-                    <div class="col jamaah section-description wow fadeIn">
-                        <h2>Jamaah</h2>
-                        <div class="divider-1 wow fadeInUp"><span></span></div>
-                        <p>We've completed 537 projects since we started back in 2010. Check them out!This is a free responsive one page template made with the Bootstrap framework. 
-                            Check it out now. Download it, customize and use it as you like!This is a free responsive one page template made with the Bootstrap framework. 
-                            Check it out now. Download it, customize and use it as you like!This is a free responsive one page template made with the Bootstrap framework. 
-                            Check it out now. Download it, customize and use it as you like!This is a free responsive one page template made with the Bootstrap framework. 
-                            Check it out now. Download it, customize and use it as you like!This is a free responsive one page template made with the Bootstrap framework. 
-                            Check it out now. Download it, customize and use it as you like!This is a free responsive one page template made with the Bootstrap framework. 
-                            Check it out now. Download it, customize and use it as you like!This is a free responsive one page template made with the Bootstrap framework. 
-                            Check it out now. Download it, customize and use it as you like!This is a free responsive one page template made with the Bootstrap framework. 
-                            Check it out now. Download it, customize and use it as you like!This is a free responsive one page template made with the Bootstrap framework. 
-                            Check it out now. Download it, customize and use it as you like!This is a free responsive one page template made with the Bootstrap framework. 
-                            Check it out now. Download it, customize and use it as you like!</p>
+                    <div class="col jamaah mt-4">
+                        <h1>Jamaah</h1>
+                        <h5 id="total_jamaah"></h5>
+                        <label for="exampleFormControlInput1">Peta Persebaran Jamaah</label>
+
+                        <div class="col" id="map" style="height: 400px; width: 100%;"></div>
+                        <style>
+                            .masjid {
+                              background-image: url('{{asset('backend/marker/masjid.png')}}');
+                              background-size: cover;
+                              width: 40px;
+                              height: 40px;
+                              border-radius: 50%;
+                              cursor: pointer;
+                            }
+                        </style>
                     </div>
                 </div>
             </div>
@@ -103,10 +107,25 @@
         <div class="laporan-container section-container">
             <div class="container">
                 <div class="row">
-                    <div class="col laporan section-description wow fadeIn">
+                    <div class="col laporan mt-4">
                         <h2>Laporan</h2>
-                        <div class="divider-1 wow fadeInUp"><span></span></div>
-                        <p>We've completed 537 projects since we started back in 2010. Check them out!</p>
+                        <h5 class="mt-4 mb-3">Laporan keuangan Masjid KH Ahmad Dahlan bulan ini</h5>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Kas Masuk</th>
+                                    <th>Kas Keluar</th>
+                                    <th>Total Saldo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-center">
+                                    <th id="total_masuk"></th>
+                                    <th id="total_keluar"></th>
+                                    <th id="saldo"></th>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -115,10 +134,27 @@
         <div class="zakat-container section-container section-container-gray-bg">
             <div class="container">
                 <div class="row">
-                    <div class="col zakat section-description wow fadeIn">
+                    <div class="col zakat mt-4">
                         <h2>Zakat</h2>
-                        <div class="divider-1 wow fadeInUp"><span></span></div>
-                        <p>We've completed 537 projects since we started back in 2010. Check them out!</p>
+                        <h5 class="mt-4 mb-3">Laporan zakat Masjid KH Ahmad Dahlan tahun ini</h5>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Total Penerimaan</th>
+                                    <th>Total Uang Tunai</th>
+                                    <th>Total Beras</th>
+                                    <th>Total Penerima Zakat</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-center">
+                                    <th id="jumlah_zakat"></th>
+                                    <th id="jumlah_tunai"></th>
+                                    <th id="jumlah_beras"></th>
+                                    <th id="jumlah_penerima"></th>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -171,6 +207,101 @@
         <script src="{{asset('frontend/assets/js/jquery.backstretch.min.js')}}"></script>
         <script src="{{asset('frontend/assets/js/waypoints.min.js')}}"></script>
         <script src="{{asset('frontend/assets/js/scripts.js')}}"></script>
+
+
+        <script type="text/javascript">
+            mapboxgl.accessToken = 'pk.eyJ1IjoiZHluYXRpYyIsImEiOiJja2JpcnpyaHQwaTcwMnNsdHZweTc2eXQ0In0.2dDt6graznsFCKEN64n1ZQ';
+                    var objek_jamaah = JSON.parse('<?php echo json_encode($jamaah) ?>')
+                    var laki = 0;
+                    var per = 0;
+
+                    for(i=0; i<objek_jamaah.length; i++){  
+                        if([objek_jamaah[i].jenisKelamin] == '1'){
+                          laki++;
+                        }else{
+                          per++;
+                        }
+                    }
+                    document.getElementById('total_jamaah').innerHTML = "Total jamaah masjid "+objek_jamaah.length+" orang, "+laki+" jamaah laki-laki dan "+per+" jamaah perempuan.";
+
+                    var locations = [];
+                    var i;
+
+                      for(i=0; i<objek_jamaah.length; i++){                     
+                          locations[i] = [[objek_jamaah[i].nama], [objek_jamaah[i].latt], [objek_jamaah[i].long], [objek_jamaah[i].aktif]];
+                      }
+
+                      var map = new mapboxgl.Map({
+                          container: 'map',
+                          style: 'mapbox://styles/mapbox/streets-v11',
+                          center: [ 112.608752, -7.898696],
+                          zoom: 14
+
+                      });
+                      var mjd = document.createElement('div');
+                      mjd.className = 'masjid';
+                      var marker = new mapboxgl.Marker(mjd)
+                        .setLngLat([ 112.608752, -7.898696])
+                        .setPopup(new mapboxgl.Popup().setText('Masjid KH Ahmad Dahlan'))
+                        .addTo(map);
+
+                      for (i = 0; i < locations.length; i++) { 
+                        new mapboxgl.Marker({color: 'green'})
+                          .setLngLat([locations[i][2], locations[i][1]])
+                          .setPopup(new mapboxgl.Popup().setText(locations[i][0]))
+                          .addTo(map);
+                      };
+
+
+            //    SALDO
+            var objek_masuk = JSON.parse('<?php echo json_encode($masuk) ?>')
+            var objek_keluar = JSON.parse('<?php echo json_encode($keluar) ?>')
+            var saldo = JSON.parse('<?php echo json_encode($saldo) ?>')
+
+            var jumlah_masuk = 0;
+
+            for (var i = 0; i < objek_masuk.length; i++) {
+                jumlah_masuk = jumlah_masuk + objek_masuk[i].jumlah;
+            }
+
+            var jumlah_keluar = 0;
+            for (var i = 0; i < objek_keluar.length; i++) {
+                jumlah_keluar = jumlah_keluar + objek_keluar[i].jumlah;
+            }
+
+            document.getElementById('total_masuk').innerHTML = "Rp. "+jumlah_masuk;
+            document.getElementById('total_keluar').innerHTML = "Rp. "+jumlah_keluar;
+            document.getElementById('saldo').innerHTML = "Rp. "+saldo; 
+
+
+
+            var objek_penerima = JSON.parse('<?php echo json_encode($penerima) ?>')
+            var objek_zakat = JSON.parse('<?php echo json_encode($zakat) ?>')
+            var jumlah_zakat = objek_zakat.length;
+            var jumlah_tunai = 0;
+            var jumlah_beras = 0;
+            var tunai = 0;
+            var beras = 0;
+
+            //console.log(objek_zakat[1].beras);
+            for(i=0; i<objek_zakat.length; i++){                     
+                jumlah_tunai = jumlah_tunai+objek_zakat[i].tunai;
+                if(objek_zakat[i].beras != null){
+                    jumlah_beras = jumlah_beras + Number(objek_zakat[i].beras) ;
+                }
+                if(objek_zakat[i].tunai != null){
+                    tunai++;
+                }
+                if(objek_zakat[i].beras != null){
+                    beras++;
+                }
+            }
+
+            document.getElementById('jumlah_zakat').innerHTML = jumlah_zakat;
+            document.getElementById('jumlah_tunai').innerHTML ="Rp. "+jumlah_tunai;
+            document.getElementById('jumlah_beras').innerHTML ="Kg. "+jumlah_beras;
+            document.getElementById('jumlah_penerima').innerHTML = objek_penerima.length+" orang";
+        </script>
 
     </body>
 
