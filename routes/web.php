@@ -13,10 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', 'FrontController@index');
-Route::get('/', function(){
-	return view('welcome');
-});
+Route::get('/', 'FrontController@index');
+
 
 Auth::routes();
 
@@ -24,7 +22,6 @@ Route::group(['prefix'=>'dashboard/admin', 'middleware'=>['admin','auth']], func
 	Route::resource('users', 'AdminUserController');
 });
 Route::group(['prefix'=>'dashboard', 'middleware'=>['auth']], function(){
-	Route::get('/', 'HomeController@index');
 	Route::resource('user', 'UserController');
 	Route::get('account/setting', 'UserController@setting')->name('user.setting');
 	Route::post('change-password', 'UserController@changePassword')->name('change.password');
