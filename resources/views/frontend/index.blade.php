@@ -189,8 +189,29 @@
                 <div class="row">
                     <div class="col profil">
                         <h2>Profil</h2>
-                        <div class="divider-1 wow fadeInUp"><span></span></div>
-                        <p>ini halaman profil</p>
+                        <div class="row">
+                            <div class="col-sm-4 text-center mt-4">
+                                <h5>Ketua</h5>
+                                <img style="width: 200px; height: 200px; border-radius: 50%" src="/uploads/avatars/{{$profil->foto_ketua}}" >
+                              <div class="col mt-2">
+                                <h5>{{$profil->ketua}}</h5>
+                              </div>  
+                            </div>
+                            <div class="col-sm-4 text-center mt-4">
+                                <h5>Sekretaris</h5>
+                                <img style="width: 200px; height: 200px; border-radius: 50%" src="/uploads/avatars/{{$profil->foto_sekretaris}}" >
+                              <div class="col mt-2">
+                                <h5>{{$profil->sekretaris}}</h5>
+                              </div>  
+                            </div>
+                            <div class="col-sm-4 text-center mt-4">
+                                <h5>Bendahara</h5>
+                                <img style="width: 200px; height: 200px; border-radius: 50%" src="/uploads/avatars/{{$profil->foto_bendahara}}" >
+                              <div class="col mt-2">
+                                <h5>{{$profil->bendahara}}</h5>
+                              </div>  
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

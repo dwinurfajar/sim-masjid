@@ -26,6 +26,7 @@ class AdminUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
         return view('backend/user/create');
@@ -123,6 +124,18 @@ class AdminUserController extends Controller
                 ]);
             return back()->with('status', 'Password Nama berhasil diubah');
         }
+    }
+    public function uploadAvatar(Request $request){
+        $validatedData = $request->validate([
+            'avatar' => 'image|required|max:1024',
+        ]);
+
+        if($request->hasFile('avatar')){
+            $request->file('avatar')->move('uploads/avatars', $request->email);
+            $request->avatar = $request->email;
+            $request->save();
+        } 
+        return back()->with('status', 'Berhasil diunggah');
     }
 
     /**

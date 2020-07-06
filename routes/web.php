@@ -43,4 +43,7 @@ Route::group(['prefix'=>'dashboard', 'middleware'=>['auth']], function(){
 
 	Route::resource('kegiatan', 'KegiatanController');
 
+	Route::resource('profil', 'ProfilController');
+	Route::post('upload-foto', 'ProfilController@uploadFoto')->name('upload.foto');
+
 });

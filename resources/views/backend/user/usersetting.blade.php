@@ -5,17 +5,6 @@
   <div class="row">
     <div class="col-sm-4 text-center">
       <img style="width: 240px; height: 240px; border-radius: 50%" src="/uploads/avatars/{{ $user->avatar }}" >
-      <div class="">
-      	<form enctype="multipart/form-data" method="post" action="{{route('upload.avatar')}}">
-      		@csrf
-	      	<input class="small ml-5 mt-2" type="file" name="avatar">
-	      	<button type="submit" class="badge badge-primary">unggah</button>
-	      	@error('avatar')
-				<label class="error alert-danger small mt-2">{{ $message }}</label>
-			@enderror
-	     </form>
-      </div>
-      
     </div>
     <div class="col-sm-8">
       <table class="table">

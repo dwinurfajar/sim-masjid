@@ -78,6 +78,8 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-hand-holding-usd"></i></div>Zakat</a>
                             <a class="nav-link" href="{{route('kegiatan.index')}}">
                             <div class="sb-nav-link-icon"><i class="fas fa-clipboard-list"></i></div>Kegiatan</a>
+                            <a class="nav-link" href="{{route('profil.index')}}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-id-card"></i></div>Profil</a>
                             
 
                         </div>
