@@ -47,7 +47,7 @@
 <div class="row">
   <div class="col-md-6">
     <div class="card bg-muted mb-4">
-        <div class="card-header text-center">Saldo</div>
+        <div class="card-header text-center">Rp {{$saldo}}</div>
         <div class="card-body text-center" id="saldo"> </div>
     </div>
 </div>
@@ -124,9 +124,6 @@
   }
   document.getElementById('jumlah_data_keluar').innerHTML =objek_keluar.length;
   document.getElementById('jumlah_keluar').innerHTML ="Rp. "+jumlah_keluar;
-
-  var saldo = jumlah_masuk - jumlah_keluar;
-  document.getElementById('saldo').innerHTML ="Rp. "+saldo;//saldo
 
     var label = [];
     var data1 = [];
