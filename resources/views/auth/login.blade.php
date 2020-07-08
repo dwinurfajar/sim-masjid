@@ -37,14 +37,8 @@
                     <input type="checkbox" class="form-check-input" id="remember">
                     <label class="form-check-label" for="remember">Ingat Password</label>
                 </div>
-                <a href="#">Lupa Password?</a>
             </div>
             <button type="submit" class="btn mt-5 rounded-pill btn-lg btn-custom btn-block text-uppercase">{{ __('Login') }}</button>
-            @if (Route::has('password.request'))
-                <a class="btn btn-link" href="{{ route('password.request') }}">
-                {{ __('Forgot Your Password?') }}
-                 </a>
-            @endif
         </form>
     </div>
 

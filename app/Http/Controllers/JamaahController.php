@@ -16,7 +16,7 @@ class JamaahController extends Controller
     public function index()
     {
         $jamaah = DB::table('jamaahs')->get();
-        return view('backend/jamaah/jamaah', ['jamaah' => $jamaah]);
+        return view('backend/jamaah/jamaah', compact('jamaah'));
     }
 
     /**
@@ -71,7 +71,7 @@ class JamaahController extends Controller
     public function show(Jamaah $jamaah)
     {
         $jamaah = DB::table('jamaahs')->where('id', $jamaah->id)->first();
-        return view('backend/jamaah/show', ['jamaah' => $jamaah]);
+        return view('backend/jamaah/show', compact('jamaah'));
     }
 
     /**
@@ -83,7 +83,7 @@ class JamaahController extends Controller
     public function edit(Jamaah $jamaah)
     {
         $jamaah = DB::table('jamaahs')->where('id', $jamaah->id)->first();
-        return view('backend/jamaah/edit', ['jamaah' => $jamaah]);
+        return view('backend/jamaah/edit', compact('jamaah'));
     }
 
     /**

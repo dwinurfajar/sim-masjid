@@ -68,7 +68,7 @@ class ZakatController extends Controller
         $masuk->tanggal = $request->tanggal;
         $masuk->save();
 
-        return back()->with('status', 'Berhasil');
+        return back()->with('status', 'Berhasil disimpan');
         
     }
 

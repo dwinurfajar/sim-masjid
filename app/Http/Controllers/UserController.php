@@ -26,7 +26,7 @@ class UserController extends Controller
     public function setting()
     {
         $user = Auth::user();
-        return view('backend/user/setting', ['user' => $user]);
+        return view('backend/user/setting', compact('user'));
     }
 
     public function changePassword(Request $request){
@@ -87,7 +87,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user = Auth::user();
-        return view('backend/user/profile', ['user' => $user]);
+        return view('backend/user/profile', compact('user'));
     }
 
     /**
@@ -117,7 +117,7 @@ class UserController extends Controller
             User::where('id', $user->id)->update([
                     'name' => $request->name
                 ]);
-            return back()->with('status', 'Username changed succesfully');
+            return back()->with('status', 'Username berhasil diubah');
         }elseif ($request->has('email')) {
             $validatedData = $request->validate([
                 'email' => 'unique:users|required|email',  
@@ -125,7 +125,7 @@ class UserController extends Controller
             User::where('id', $user->id)->update([
                     'email' => $request->email
                 ]);
-            return back()->with('status', 'Email changed succesfully');
+            return back()->with('status', 'Email berhasil diubah');
         }
     }
 

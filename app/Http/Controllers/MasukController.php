@@ -15,10 +15,7 @@ class MasukController extends Controller
      */
     public function index()
     {
-        $month = date('m');
-        $year = date('yy');
-        
-        $masuk = DB::table('masuks')->whereYear('tanggal', $year)->whereMonth('tanggal' , $month)->orderBy('tanggal', 'desc')->get();
+        $masuk = DB::table('masuks')->whereYear('tanggal', date('yy'))->whereMonth('tanggal' , date('m'))->orderBy('tanggal', 'desc')->get();
         return view('backend/keuangan/masuk/masuk', compact('masuk'));
     }
 
@@ -101,7 +98,7 @@ class MasukController extends Controller
     {
         $masuk = DB::table('masuks')->where('id',$masuk->id)->first();
         //dump($masuk);
-        return view('backend/keuangan/masuk/edit', ['masuk' => $masuk]);
+        return view('backend/keuangan/masuk/edit', compact('masuk'));
     }
 
     /**

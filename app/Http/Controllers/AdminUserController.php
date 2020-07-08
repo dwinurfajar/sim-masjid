@@ -18,7 +18,7 @@ class AdminUserController extends Controller
     public function index()
     {
         $user = DB::table('users')->get();
-        return view('backend/user/user', ['user' => $user]);
+        return view('backend/user/user', compact('user'));
     }
 
     /**
@@ -67,7 +67,7 @@ class AdminUserController extends Controller
     public function show($id)
     {
         $user = DB::table('users')->where('id' , $id)->first();
-        return view('backend/user/profile', ['user' => $user]);
+        return view('backend/user/profile', compact('user'));
     }
 
     /**
@@ -79,7 +79,7 @@ class AdminUserController extends Controller
     public function edit($id)
     {
         $user = DB::table('users')->where('id', $id)->first();
-        return view('backend/user/usersetting', ['user'=> $user]);
+        return view('backend/user/usersetting', compact('user'));
     }
 
     /**
@@ -106,7 +106,7 @@ class AdminUserController extends Controller
             User::where('id', $user->id)->update([
                     'email' => $request->email
                 ]);
-            return back()->with('status', 'Email Nama berhasil diubah');
+            return back()->with('status', 'Email berhasil diubah');
         }elseif ($request->has('admin')) {
             $validatedData = $request->validate([
                 'admin' => 'required',  
@@ -114,7 +114,7 @@ class AdminUserController extends Controller
             User::where('id', $user->id)->update([
                     'admin' => $request->admin
                 ]);
-            return back()->with('status', 'Role Nama berhasil diubah');
+            return back()->with('status', 'Role berhasil diubah');
         }elseif ($request->has('password')) {
             $validatedData = $request->validate([
                 'password' => 'required|min:8',  
@@ -122,7 +122,7 @@ class AdminUserController extends Controller
             User::where('id', $user->id)->update([
                     'password' => Hash::make($request->password)
                 ]);
-            return back()->with('status', 'Password Nama berhasil diubah');
+            return back()->with('status', 'Password berhasil diubah');
         }
     }
     public function uploadAvatar(Request $request){

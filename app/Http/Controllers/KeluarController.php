@@ -15,10 +15,7 @@ class KeluarController extends Controller
      */
     public function index()
     {
-        $month = date('m');
-        $year = date('yy');
-
-        $keluar = DB::table('keluars')->whereYear('tanggal', $year)->whereMonth('tanggal' , $month)->orderBy('tanggal', 'desc')->get();
+        $keluar = DB::table('keluars')->whereYear('tanggal', date('yy'))->whereMonth('tanggal' , date('m'))->orderBy('tanggal', 'desc')->get();
         return view('backend/keuangan/keluar/keluar', compact('keluar'));
     }
 
@@ -38,7 +35,7 @@ class KeluarController extends Controller
         }
         else{
             $month = date('m');
-            $keluar = DB::table('keluars')->whereMonth('tanggal', $month)->orderBy('tanggal', 'desc')->get();
+            $keluar = DB::table('keluars')->whereMonth('tanggal', date('m'))->orderBy('tanggal', 'desc')->get();
             return view('backend/keuangan/keluar/keluar', compact('keluar'))->with('status', 'Kesalahan');
         }
         
